@@ -4,14 +4,15 @@ import buysModule from "./Buys.module.css";
 //Components
 import NavBar from "../components/NavBar";
 import Card from "../components/Card";
-//Services
-import { cars_list } from "../services/getCars";
-import getProducts from "../services/getProducts";
 import PaginationComponent from "../components/Pagination";
+//Services
+import getProducts from "../services/getProducts";
 
 const Compras = () => {
   const [carsList, setCarList] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const lastIndexSlice = currentPage * 6;
+  const firstIndexSlice = lastIndexSlice - 6;
 
   useEffect(() => {
     getProducts().then((data) => setCarList(data));
@@ -58,7 +59,9 @@ const Compras = () => {
                 />
               )
             )
-            .slice(0, 6)}
+            .slice(firstIndexSlice, lastIndexSlice)}
+        </section>
+        <section className={buysModule.pagination}>
           {carsList.length == 0 ? (
             <span>Cargando...</span>
           ) : (
