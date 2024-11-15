@@ -1,0 +1,71 @@
+.navbar {
+  height: 70px;
+  display: grid;
+  grid-template-columns: repeat(6, minmax(133px, 1fr));
+  grid-template-areas: "Img - - Menu Menu Logout";
+  align-items: center;
+  justify-content: space-between;
+  padding: 0px 30px;
+  min-width: 100%;
+  box-shadow: rgba(50, 50, 93, 0.23) 0 30px 30px -20px;
+  box-sizing: border-box;
+}
+
+.navbar img {
+  grid-area: Img;
+  height: 70px;
+  width: 70px;
+}
+
+.menu {
+  display: flex;
+  column-gap: 30px;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  grid-area: Menu;
+  justify-self: end;
+}
+
+.item {
+  display: inline-block;
+  font-size: 19px;
+  font-weight: 600;
+}
+
+.logout_container {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  grid-area: Logout;
+  justify-self: end;
+}
+
+.logout_text {
+  font-size: 19px;
+  font-weight: 600;
+}
+
+@media (width < 800px) {
+  .navbar {
+    height: 170px;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    gap: 5px;
+  }
+
+  .menu {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    justify-items: center;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 10px;
+  }
+
+  .logout_container {
+    display: none;
+  }
+}
