@@ -5,6 +5,7 @@ import LogoR from "../assets/LogoR.png";
 //React-router
 import { Link } from "react-router-dom";
 //Font-Awesome
+//Importacion de Logos
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
 import { faCircleUser } from "@fortawesome/free-regular-svg-icons";
@@ -44,5 +45,5 @@ const Navbar = () => {
     </nav>
   );
 };
-
+//Exportacion
 export default Navbar;
