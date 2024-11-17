@@ -1,17 +1,24 @@
 import React from "react";
 //Styles
 import "./App.css";
-
+//Components
+import Layout from "./components/Layout";
 //Pages
 import Buys from "./pages/Buys";
 import Start from "./pages/Start";
-//React-router
+//React-router-Dom
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 const router = createBrowserRouter(
   [
-    { path: "products/", element: <Buys /> },
-    { path: "/", element: <Start /> },
+    {
+      path: "/",
+      element: <Layout />,
+      children: [
+        { path: "/", element: <Start /> },
+        { path: "products", element: <Buys /> },
+      ],
+    },
   ],
   {
     future: {
