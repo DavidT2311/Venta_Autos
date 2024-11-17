@@ -5,7 +5,6 @@ import LogoR from "../assets/LogoR.png";
 //React-router
 import { Link } from "react-router-dom";
 //Font-Awesome
-//Importacion de Logos
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
 import { faCircleUser } from "@fortawesome/free-regular-svg-icons";
@@ -15,7 +14,7 @@ const Navbar = () => {
     <nav className={navbarModule.navbar}>
       <img src={LogoR} alt="Logo" />
       <ul className={navbarModule.menu}>
-        <Link to="/">
+        <Link to={"/"}>
           <li className={navbarModule.item}>Inicio</li>
         </Link>
         <Link to={"products/"}>
