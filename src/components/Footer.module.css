@@ -1,0 +1,53 @@
+.footer{
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 15px;
+    background-color: #0e0e0e;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.link{
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    list-style: none;
+    cursor: pointer;
+    padding: 20px;
+    margin: 15px;
+    text-align: center;
+    border-radius: 200px;
+}
+
+.p{
+    color: white;
+
+}
+.button{
+    height: 30px;
+    text-transform: uppercase;
+    text-decoration: none;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    background-color: rgb(14, 63, 199);
+    border-radius: 20px;
+    color: #1d89ff;
+    font-weight: 400;
+
+}
+.section{
+    display: flex;
+    gap: 20px;
+}
+
+.icon{
+    cursor: pointer;
+}
+
+.icon:hover{
+    font-size: 40px;
+    transition: all 0.2s ease-in-out;
+}

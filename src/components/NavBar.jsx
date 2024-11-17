@@ -14,7 +14,7 @@ const Navbar = () => {
     <nav className={navbarModule.navbar}>
       <img src={LogoR} alt="Logo" />
       <ul className={navbarModule.menu}>
-        <Link to="/">
+        <Link to={"/"}>
           <li className={navbarModule.item}>Inicio</li>
         </Link>
         <Link to={"products/"}>
@@ -44,5 +44,5 @@ const Navbar = () => {
     </nav>
   );
 };
-
+//Exportacion
 export default Navbar;
