@@ -1,26 +1,58 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 //Styles
 import buysModule from "./Buys.module.css";
 //Components
-import NavBar from "../components/NavBar";
 import Card from "../components/Card";
 import PaginationComponent from "../components/Pagination";
 //Services
 import getProducts from "../services/getProducts";
+import FilterInput from "../components/FilterInput";
 
-const Compras = () => {
+const Buys = () => {
   const [carsList, setCarList] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const lastIndexSlice = currentPage * 6;
   const firstIndexSlice = lastIndexSlice - 6;
+  //Filtrado de elementos
+  const [carsFilterList, setCarsFilterList] = useState(carsList);
+  //Referencia de los inputs
+  const titleRef = useRef(null);
+  const categoryRef = useRef(null);
+  const rateRef = useRef(null);
+
+  const filters = () => {
+    let filteredCars = carsList;
+
+    if (titleRef) {
+      filteredCars = filteredCars.filter((car) =>
+        car.title.toLowerCase().includes(titleRef.current.value.toLowerCase())
+      );
+    }
+
+    if (categoryRef) {
+      filteredCars = filteredCars.filter((car) =>
+        car.category
+          .toLowerCase()
+          .includes(categoryRef.current.value.toLowerCase())
+      );
+    }
+
+    setCarsFilterList(filteredCars);
+  };
 
   useEffect(() => {
-    getProducts().then((data) => setCarList(data));
+    filters();
+  }, [titleRef, categoryRef, carsList]);
+
+  useEffect(() => {
+    getProducts().then((data) => {
+      setCarList(data);
+      setCarsFilterList(data);
+    });
   }, []);
 
   return (
     <>
-      <NavBar />
       <main className={buysModule.main}>
         <h1 className={buysModule.title}>Vehiculos disponibles</h1>
         {/* Seccion secundaria de filtros */}
@@ -31,17 +63,38 @@ const Compras = () => {
         {/* Seccion principal de filtos */}
         <section className={buysModule.filter_section}>
           <h2 className={buysModule.filter_title}>Filtros</h2>
-          {/* Filtro buscar por titulo */}
-          <article></article>
-          {/* Filtro buscar por categoria */}
-          <article></article>
-          {/* Filtro buscar por calificacion */}
-          <article></article>
+          <section className={buysModule.internt_filter_section}>
+            {/* Filtro buscar por titulo */}
+            <FilterInput
+              title="Buscar por titulo"
+              name="tituloInput"
+              type="text"
+              reference={titleRef}
+              action={filters}
+            />
+            {/* Filtro buscar por categoria */}
+            <FilterInput
+              title="Buscar por categoria"
+              name="tituloInput"
+              type="text"
+              reference={categoryRef}
+              action={filters}
+            />
+            {/* Filtro buscar por calificacion */}
+            <FilterInput
+              title="Buscar por calificacion"
+              name="tituloInput"
+              type="text"
+              reference={rateRef}
+              action={filters}
+            />
+          </section>
         </section>
 
         {/* Seccion principal */}
         <section className={buysModule.main_section}>
-          {carsList
+          {console.log(carsFilterList)}
+          {carsFilterList
             .map(
               (
                 { id, title, price, description, category, image, rating },
@@ -62,14 +115,14 @@ const Compras = () => {
             .slice(firstIndexSlice, lastIndexSlice)}
         </section>
         <section className={buysModule.pagination}>
-          {carsList.length == 0 ? (
+          {carsFilterList.length == 0 ? (
             <span>Cargando...</span>
           ) : (
             <PaginationComponent
               key={0}
               currentPage={currentPage}
               setCurrentPage={setCurrentPage}
-              quantityOfProducts={carsList.length}
+              quantityOfProducts={carsFilterList.length}
               quantityProductsPerPage={6}
             />
           )}
@@ -79,4 +132,4 @@ const Compras = () => {
   );
 };
 
-export default Compras;
+export default Buys;

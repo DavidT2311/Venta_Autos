@@ -1,0 +1,18 @@
+.container {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  gap: 6px;
+  max-width: 200px;
+}
+
+.label {
+  font-weight: 500;
+  padding: 0 3px;
+}
+
+.input {
+  color: darkgray;
+  border-radius: 4px;
+  padding: 0 4px;
+}
