@@ -4,52 +4,83 @@ import buysModule from "./Buys.module.css";
 //Components
 import Card from "../components/Card";
 import PaginationComponent from "../components/Pagination";
+import FilterInput from "../components/FilterInput";
+import FilterSelect from "../components/FilterSelect";
 //Services
 import getProducts from "../services/getProducts";
-import FilterInput from "../components/FilterInput";
+import BuysCart from "../components/BuysCart";
 
 const Buys = () => {
   const [carsList, setCarList] = useState([]);
+  //Elementos para la paginacion
   const [currentPage, setCurrentPage] = useState(1);
   const lastIndexSlice = currentPage * 6;
   const firstIndexSlice = lastIndexSlice - 6;
-  //Filtrado de elementos
+
+  //Lista de filtrado de elementos
   const [carsFilterList, setCarsFilterList] = useState(carsList);
+
   //Referencia de los inputs
   const titleRef = useRef(null);
   const categoryRef = useRef(null);
   const rateRef = useRef(null);
 
+  //Elementos para los select
+  const [categories, setCategories] = useState([]);
+
+  //Filtros para todos los inputs de la barra superior
   const filters = () => {
-    let filteredCars = carsList;
+    let filterList = carsList;
 
     if (titleRef) {
-      filteredCars = filteredCars.filter((car) =>
-        car.title.toLowerCase().includes(titleRef.current.value.toLowerCase())
+      filterList = filterList.filter((item) =>
+        item.title.toLowerCase().includes(titleRef.current.value.toLowerCase())
       );
     }
 
-    if (categoryRef) {
-      filteredCars = filteredCars.filter((car) =>
-        car.category
+    if (categoryRef && categoryRef.current.value != 0) {
+      filterList = filterList.filter((item) =>
+        item.category
           .toLowerCase()
           .includes(categoryRef.current.value.toLowerCase())
       );
     }
 
-    setCarsFilterList(filteredCars);
+    if (rateRef && rateRef.current.value != 0) {
+      filterList = filterList.filter(
+        (item) =>
+          parseFloat(rateRef.current.value) <= item.rating.rate &&
+          parseFloat(rateRef.current.value) + 1 > item.rating.rate
+      );
+    }
+
+    setCurrentPage(1);
+    setCarsFilterList(filterList);
   };
 
-  useEffect(() => {
-    filters();
-  }, [titleRef, categoryRef, carsList]);
+  const getCategories = () => {
+    let list = [];
+    carsList.map((item) => list.push(item.category));
+    setCategories([...new Set(list)]);
+  };
 
+  //Carga inicial de la pagina
   useEffect(() => {
     getProducts().then((data) => {
       setCarList(data);
       setCarsFilterList(data);
     });
   }, []);
+
+  //Cargar los datos en el select
+  useEffect(() => {
+    getCategories();
+  }, [carsList]);
+
+  //Detectar cambios en los direfentes inputs
+  useEffect(() => {
+    filters();
+  }, [titleRef, categoryRef, carsList]);
 
   return (
     <>
@@ -63,37 +94,42 @@ const Buys = () => {
         {/* Seccion principal de filtos */}
         <section className={buysModule.filter_section}>
           <h2 className={buysModule.filter_title}>Filtros</h2>
-          <section className={buysModule.internt_filter_section}>
+          <section className={buysModule.intern_filter_section}>
             {/* Filtro buscar por titulo */}
             <FilterInput
               title="Buscar por titulo"
-              name="tituloInput"
+              name="titleInput"
               type="text"
               reference={titleRef}
               action={filters}
             />
             {/* Filtro buscar por categoria */}
-            <FilterInput
+            <FilterSelect
               title="Buscar por categoria"
-              name="tituloInput"
-              type="text"
+              name="categorySelect"
+              options={categories}
               reference={categoryRef}
               action={filters}
             />
             {/* Filtro buscar por calificacion */}
-            <FilterInput
+            <FilterSelect
               title="Buscar por calificacion"
-              name="tituloInput"
-              type="text"
+              name="rateSelect"
+              options={[1, 2, 3, 4, 5]}
               reference={rateRef}
               action={filters}
             />
+            <BuysCart />
           </section>
         </section>
 
         {/* Seccion principal */}
         <section className={buysModule.main_section}>
-          {console.log(carsFilterList)}
+          {carsFilterList.length == 0 && carsList.length > 1 ? (
+            <span>No se encontraron resultados</span>
+          ) : (
+            ""
+          )}
           {carsFilterList
             .map(
               (
@@ -114,8 +150,9 @@ const Buys = () => {
             )
             .slice(firstIndexSlice, lastIndexSlice)}
         </section>
+        {/* Seccion para la paginacion */}
         <section className={buysModule.pagination}>
-          {carsFilterList.length == 0 ? (
+          {carsList.length == 0 ? (
             <span>Cargando...</span>
           ) : (
             <PaginationComponent
