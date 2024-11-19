@@ -24,7 +24,7 @@ const  FormContact = () => {
             name={"nota"}
             place={"Nota:"}
             />
-            <button>Enviar</button>
+            <button className={FormContactModule.btn}>Enviar</button>
         </div>
         
     
