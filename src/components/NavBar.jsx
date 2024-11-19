@@ -20,8 +20,8 @@ const Navbar = () => {
         <Link to={"products/"}>
           <li className={navbarModule.item}>Productos</li>
         </Link>
-        <Link to="#">
-          <li className={navbarModule.item}>Nosotros</li>
+        <Link to={"contact/"}>
+          <li className={navbarModule.item}>Contactanos</li>
         </Link>
         <Link to="#">
           <li className={navbarModule.item}>
