@@ -2,7 +2,7 @@ import { combineReducers } from "redux";
 import cartSlice from "./slices/cartSlice";
 
 const reducer = combineReducers({
-  cart: cartSlice,
+  products: cartSlice,
 });
 
 export default reducer;

@@ -22,6 +22,8 @@ const Card = ({ ID, title, price, description, category, image, rating }) => {
           <FontAwesomeIcon
             icon={faHeart}
             size="2x"
+            color="mediumpurple"
+            beatFade
             className={cardModule.heart_icon}
             onClick={() => setIsInFavorite(!isInFavorite)}
           />
@@ -29,6 +31,7 @@ const Card = ({ ID, title, price, description, category, image, rating }) => {
           <FontAwesomeIcon
             icon={faHeartHover}
             size="2x"
+            color="mediumpurple"
             className={cardModule.heart_icon}
             onClick={() => setIsInFavorite(!isInFavorite)}
           />
