@@ -10,11 +10,49 @@
   gap: 35px;
 }
 
-.products{
+.input_search{
+  left: auto;
+}
 
+.container_products {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+
+.products{
     display: flex;
-    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 40px;
 }
 
 
+.container_services{
+  display: flex;
+  flex-direction: column;  
   
+}
+
+
+.h1{
+  font-size: 20px;
+  flex-direction: column;
+}
+
+.h3{
+  color: aqua;
+}
+
+.service_icon{
+  color: yellow;
+  padding: 0 50px;
+  
+}
+.shop_icon{
+  color: yellow;
+  padding: 0 50px;
+
+
+}
