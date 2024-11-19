@@ -9,6 +9,11 @@ import FilterSelect from "../components/FilterSelect";
 //Services
 import getProducts from "../services/getProducts";
 import BuysCart from "../components/BuysCart";
+//Font-Awesome
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTags } from "@fortawesome/free-solid-svg-icons";
+import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { faDollar } from "@fortawesome/free-solid-svg-icons";
 
 const Buys = () => {
   const [carsList, setCarList] = useState([]);
@@ -20,10 +25,18 @@ const Buys = () => {
   //Lista de filtrado de elementos
   const [carsFilterList, setCarsFilterList] = useState(carsList);
 
-  //Referencia de los inputs
+  //Referencia de los inputs --Seccion de filtros superior
   const titleRef = useRef(null);
   const categoryRef = useRef(null);
   const rateRef = useRef(null);
+
+  //Referencia de los inputs --Seccion de filtros lateral
+  const minPrice = useRef(null);
+  const maxPrice = useRef(null);
+  const minRate = useRef(null);
+  const maxRate = useRef(null);
+  const minBought = useRef(null);
+  const maxBought = useRef(null);
 
   //Elementos para los select
   const [categories, setCategories] = useState([]);
@@ -32,25 +45,71 @@ const Buys = () => {
   const filters = () => {
     let filterList = carsList;
 
+    //Seccion superior de filtros - Filtro para el titulo
     if (titleRef) {
       filterList = filterList.filter((item) =>
         item.title.toLowerCase().includes(titleRef.current.value.toLowerCase())
       );
     }
 
+    //Seccion superior de filtros - Filtro para el titulo
     if (categoryRef && categoryRef.current.value != 0) {
-      filterList = filterList.filter((item) =>
-        item.category
-          .toLowerCase()
-          .includes(categoryRef.current.value.toLowerCase())
+      filterList = filterList.filter(
+        (item) =>
+          item.category.toLowerCase() ===
+          categoryRef.current.value.toLowerCase()
       );
     }
 
+    //Seccion superior de filtros - Filtro para el titulo
     if (rateRef && rateRef.current.value != 0) {
+      console.log(rateRef.current.value);
       filterList = filterList.filter(
         (item) =>
           parseFloat(rateRef.current.value) <= item.rating.rate &&
           parseFloat(rateRef.current.value) + 1 > item.rating.rate
+      );
+    }
+
+    //Seccion lateral de filtros - Filtro para el precio minimo
+    if (minPrice && minPrice.current.value != "") {
+      filterList = filterList.filter(
+        (item) => parseFloat(minPrice.current.value) <= item.price
+      );
+    }
+
+    //Seccion lateral de filtros - Filtro para el precio maximo
+    if (maxPrice && maxPrice.current.value != "") {
+      filterList = filterList.filter(
+        (item) => parseFloat(maxPrice.current.value) >= item.price
+      );
+    }
+
+    //Seccion lateral de filtros - Filtro para el calificacion minima
+    if (minRate && minRate.current.value != "") {
+      filterList = filterList.filter(
+        (item) => parseFloat(minRate.current.value) <= item.rating.rate
+      );
+    }
+
+    //Seccion lateral de filtros - Filtro para el calificacion maxima
+    if (maxRate && maxRate.current.value != "") {
+      filterList = filterList.filter(
+        (item) => parseFloat(maxRate.current.value) >= item.rating.rate
+      );
+    }
+
+    //Seccion lateral de filtros - Filtro para el minimo comprado
+    if (minBought && minBought.current.value != "") {
+      filterList = filterList.filter(
+        (item) => parseFloat(minBought.current.value) <= item.rating.count
+      );
+    }
+
+    //Seccion lateral de filtros - Filtro para el maximo comprado
+    if (maxBought && maxBought.current.value != "") {
+      filterList = filterList.filter(
+        (item) => parseFloat(maxBought.current.value) >= item.rating.count
       );
     }
 
@@ -89,6 +148,72 @@ const Buys = () => {
         {/* Seccion secundaria de filtros */}
         <section className={buysModule.ordering_section}>
           <h2 className={buysModule.ordering_title}>Ordenamiento</h2>
+          {/* Titulo del filtro ordernar por precio */}
+          <article className={buysModule.ordering_sutitle_container}>
+            <FontAwesomeIcon icon={faTags} size="1x" color="white" fade />
+            <p className={buysModule.ordering_subtitle}>Ordenar por precio</p>
+          </article>
+          {/* Filtro para ordenar por precio minimo y precio maximo */}
+          <FilterInput
+            title="Precio minimo"
+            name="minPrice"
+            type="number"
+            reference={minPrice}
+            action={filters}
+          />
+          <FilterInput
+            title="Precio maximo"
+            name="maxPrice"
+            type="number"
+            reference={maxPrice}
+            action={filters}
+          />
+
+          {/* Titulo del filtro ordernar por calificacion */}
+          <article className={buysModule.ordering_sutitle_container}>
+            <FontAwesomeIcon icon={faStar} size="1x" color="white" spin />
+            <p className={buysModule.ordering_subtitle}>
+              Ordenar por calificacion
+            </p>
+          </article>
+          {/* Filtro para ordenar por calificacion minima y calificacion maxima */}
+          <FilterInput
+            title="Calificacion minima"
+            name="maxRate"
+            type="number"
+            reference={minRate}
+            action={filters}
+          />
+          <FilterInput
+            title="Calificacion maxima"
+            name="maxRate"
+            type="number"
+            reference={maxRate}
+            action={filters}
+          />
+
+          {/* Titulo del filtro ordernar por calificacion */}
+          <article className={buysModule.ordering_sutitle_container}>
+            <FontAwesomeIcon icon={faDollar} size="1x" color="white" bounce />
+            <p className={buysModule.ordering_subtitle}>
+              Ordenar por comprados
+            </p>
+          </article>
+          {/* Filtro para ordenar por compra minima y compra maxima */}
+          <FilterInput
+            title="Minimo comprado"
+            name="minBought"
+            type="number"
+            reference={minBought}
+            action={filters}
+          />
+          <FilterInput
+            title="Maximo comprado"
+            name="maxBought"
+            type="number"
+            reference={maxBought}
+            action={filters}
+          />
         </section>
 
         {/* Seccion principal de filtos */}

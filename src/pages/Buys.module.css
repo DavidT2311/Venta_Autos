@@ -19,7 +19,10 @@
 .ordering_section {
   grid-column: 1 / 2;
   grid-row: 2 / 7;
-  text-align: center;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  row-gap: 15px;
   padding: 12px 10px;
   background-color: var(--violet);
   box-shadow: 0px 1px 5px rgb(30, 30, 30);
@@ -28,6 +31,21 @@
 
 .ordering_section .ordering_title {
   font-size: 27px;
+}
+
+.ordering_sutitle_container {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  column-gap: 10px;
+  margin-top: 15px;
+}
+
+.ordering_section .ordering_sutitle_container .ordering_subtitle {
+  color: var(--dark-blue);
+  font-size: 17px;
+  font-weight: 500;
+  margin: 0;
 }
 
 .filter_section {

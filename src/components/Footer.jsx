@@ -12,7 +12,7 @@ import Button from "./Button";
 export const Footer = () => {
   return (
     <footer className={footerModule.footer}>
-      <Link to="/Nosotros" className={footerModule.link}>
+      <Link to={"contact/"} className={footerModule.link}>
         <Button text="Contactenos" classes="blue" />
       </Link>
       <p className={footerModule.p}>
