@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 //Style
 import startModule from "./Start.module.css";
-//Imagen
+//Assets
 import Fondojfif from "../assets/Fondo.jfif";
 //Components
 import Card from "../components/Card";
