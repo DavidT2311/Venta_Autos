@@ -1,0 +1,17 @@
+.ubicaciones-lista {
+    display: flex;
+    flex-direction: column;  
+    gap: 15px;  
+    padding: 20px;  
+  }
+  
+  .ubicacioncontainer {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .ubicacionnombre {
+    font-size: 18;
+    color: #333;
+  }

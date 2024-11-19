@@ -1,12 +1,12 @@
 import React from "react";
-import StyleIframe from "./IframeContact.module.css"
+import IframeContactMoudle from "./IframeContact.module.css"
 
 
 
 const Iframe = ({location}) =>{
     return(
-        <article>
-            <iframe className={StyleIframe.iframe} src={location} frameborder="0"></iframe>
+        <article >
+            <img className={IframeContactMoudle.imagen} src={location} alt="" />
         </article>
     )
 }
