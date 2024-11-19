@@ -6,6 +6,7 @@ import Layout from "./components/Layout";
 //Pages
 import Buys from "./pages/Buys";
 import Start from "./pages/Start";
+import Contact from "./pages/Contact";
 //React-router-Dom
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
@@ -17,6 +18,7 @@ const router = createBrowserRouter(
       children: [
         { path: "/", element: <Start /> },
         { path: "products", element: <Buys /> },
+        { path: "Contact", element: <Contact /> },
       ],
     },
   ],
