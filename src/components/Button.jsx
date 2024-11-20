@@ -8,6 +8,7 @@ const Button = ({ handleEvent, text, classes }) => {
   useEffect(() => {
     if (classes == "green") setClassText(buttonModule.green);
     if (classes == "blue") setClassText(buttonModule.blue);
+    if (classes == "yellow") setClassText(buttonModule.yellow);
   }, [text]);
 
   return (
