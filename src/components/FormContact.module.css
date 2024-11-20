@@ -2,14 +2,13 @@
   position: relative;
   bottom: 20px;
   right: 20px;
-  width: 450px;
-  padding: 50px;
+  width: 500px;
+  padding: 80px;
   display: flex;
   justify-content: center;
   margin: auto;
   left: 400px;
-  top: -250px;
-
+  top: -500px;
   background-color: var(--dark-violet);
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -38,7 +37,7 @@
 }
 
 .start:focus {
-  border-color: #4caf50;
+  border-color: #6656ef;
   outline: none;
 }
 

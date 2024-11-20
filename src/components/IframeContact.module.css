@@ -3,23 +3,23 @@
     width: 100px;
     
 }
- .imagen2{
+.imagen2{
     position: relative;
-    top: -270px;
-    left: 1 00px;
-    width: 300px;
+    top: -180px;
+    left: 40px;
+    width: 450px;
     height: 160px;  
     border-radius: 10%;  
 }
 
 .nombre{
     position: relative;
-    left: 200px;
-    top: -420px;
+    left: 150px;
+    top: -270px;
 }
 
 .icon{
     position: relative;
-    left: 200px;
-    top: -420px;
+    left: 150px;
+    top: -270px;
 }

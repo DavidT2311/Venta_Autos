@@ -9,7 +9,6 @@ const Info = () => {
     <p>Celular: 301245781</p>
     <p>Correo eléctronico: Venta_Autos@gmail.com</p>
     </div>
-    
     </>
     )
 }

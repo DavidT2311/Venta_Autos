@@ -1,18 +1,14 @@
 .title{
     color: rgb(116, 114, 252);
-    align-items: center;
+    text-align: center;
 }
 
 
-.pp{
-    
-    font-weight: 200vh;
-}
 .logo{
     position: relative;
-    top: -500px;
+    top: -140px;
     left: 460px;
-    width: 300px;
-    height: 160px;  
+    width: 400px;
+    height: 220px;  
     border-radius: 10%;  
 }
