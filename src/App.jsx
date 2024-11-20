@@ -7,6 +7,7 @@ import Layout from "./components/Layout";
 import Buys from "./pages/Buys";
 import Start from "./pages/Start";
 import Contact from "./pages/Contact";
+import FormBuy from "./pages/FormBuy"
 //React-router-Dom
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
@@ -19,6 +20,7 @@ const router = createBrowserRouter(
         { path: "/", element: <Start /> },
         { path: "products", element: <Buys /> },
         { path: "contact", element: <Contact /> },
+        { path: "formbuy", element: <FormBuy /> },
       ],
     },
   ],
