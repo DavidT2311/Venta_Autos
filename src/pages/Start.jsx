@@ -13,8 +13,7 @@ import Button from "../components/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCar } from "@fortawesome/free-solid-svg-icons";
 import { faShop } from "@fortawesome/free-solid-svg-icons";
-import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-import { faInstagram } from "@fortawesome/free-brands-svg-icons";
+import { faUsersViewfinder } from "@fortawesome/free-solid-svg-icons";
 
 const start = () => {
   const [carsList, setCarList] = useState([]);
@@ -34,11 +33,6 @@ const start = () => {
           <span>41.156 Ofertas</span>
           <br />
           <input className={startModule.input} type="text" />
-          <FontAwesomeIcon
-            className={startModule.search}
-            icon={faMagnifyingGlass}
-            size="2x"
-          />
         </section>
         <section className={startModule.container_products}>
           <section className={startModule.products}>
@@ -82,7 +76,9 @@ const start = () => {
               vehículos de calidad.
             </h1>
             <h3 className={startModule.h3}>Somos</h3>
-            <Button text="Saber mas" classes="yellow" />
+            <Button text="Contactanos" classes="yellow" />
+          </article>
+          <article className={startModule.article_icons}>
             <FontAwesomeIcon
               icon={faCar}
               size="2x"
@@ -94,9 +90,8 @@ const start = () => {
               className={startModule.icon}
             />
             <FontAwesomeIcon
-              icon={faInstagram}
+              icon={faUsersViewfinder}
               size="2x"
-              color="white"
               className={startModule.icon}
             />
           </article>

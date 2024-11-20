@@ -41,16 +41,18 @@
 
 .container_services{
   display: flex;
-  flex-direction: column;
-  gap: 40px; 
+  flex-direction: row;
+  gap: 200px;
+  justify-content: center; 
   
 }
+
 
 .h1{
   font-size: 15px;
   flex-direction: column;
   gap: 40px;
-  
+  max-width: 400px;
 }
 
 .h3{
@@ -64,8 +66,15 @@
   cursor: pointer;
  
 }
+
 .icon:hover{
   font-size: 40px;
   transition: all 0.2s ease-in-out;
 
+}
+
+@media (width < 800px) {
+  .container_services{
+    flex-direction: column;
+  }
 }
