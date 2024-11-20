@@ -6,24 +6,34 @@ import Card from "../components/Card";
 import PaginationComponent from "../components/Pagination";
 import FilterInput from "../components/FilterInput";
 import FilterSelect from "../components/FilterSelect";
-//Services
-import getProducts from "../services/getProducts";
 import BuysCart from "../components/BuysCart";
+import Loader from "../components/Loader";
+import NotFound from "../components/NotFound";
 //Font-Awesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTags } from "@fortawesome/free-solid-svg-icons";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { faDollar } from "@fortawesome/free-solid-svg-icons";
+//productsSlice
+import { fetchProducts } from "../redux/slices/productsSlice";
+//Redux
+import { useDispatch, useSelector } from "react-redux";
 
 const Buys = () => {
-  const [carsList, setCarList] = useState([]);
+  //Redux - productsSlice
+  const { products, loading } = useSelector((state) => state.products);
+  const dispatch = useDispatch();
+
   //Elementos para la paginacion
   const [currentPage, setCurrentPage] = useState(1);
   const lastIndexSlice = currentPage * 6;
   const firstIndexSlice = lastIndexSlice - 6;
 
   //Lista de filtrado de elementos
-  const [carsFilterList, setCarsFilterList] = useState(carsList);
+  const [carsFilterList, setCarsFilterList] = useState(products);
+
+  //Elementos para los select
+  const [categories, setCategories] = useState([]);
 
   //Referencia de los inputs --Seccion de filtros superior
   const titleRef = useRef(null);
@@ -38,12 +48,31 @@ const Buys = () => {
   const minBought = useRef(null);
   const maxBought = useRef(null);
 
-  //Elementos para los select
-  const [categories, setCategories] = useState([]);
+  //Carga inicial de la pagina
+  useEffect(() => {
+    if (loading == "idle") dispatch(fetchProducts());
+  }, [loading, dispatch]);
+
+  //Cargar los datos en el select
+  useEffect(() => {
+    getCategories();
+  }, [products]);
+
+  //Detectar cambios en los direfentes inputs
+  useEffect(() => {
+    filters();
+  }, [titleRef, categoryRef, products]);
+
+  //Generar lista con las categorias sin repetir
+  const getCategories = () => {
+    let list = [];
+    products.map((item) => list.push(item.category));
+    setCategories([...new Set(list)]);
+  };
 
   //Filtros para todos los inputs de la barra superior
   const filters = () => {
-    let filterList = carsList;
+    let filterList = products;
 
     //Seccion superior de filtros - Filtro para el titulo
     if (titleRef) {
@@ -116,30 +145,6 @@ const Buys = () => {
     setCurrentPage(1);
     setCarsFilterList(filterList);
   };
-
-  const getCategories = () => {
-    let list = [];
-    carsList.map((item) => list.push(item.category));
-    setCategories([...new Set(list)]);
-  };
-
-  //Carga inicial de la pagina
-  useEffect(() => {
-    getProducts().then((data) => {
-      setCarList(data);
-      setCarsFilterList(data);
-    });
-  }, []);
-
-  //Cargar los datos en el select
-  useEffect(() => {
-    getCategories();
-  }, [carsList]);
-
-  //Detectar cambios en los direfentes inputs
-  useEffect(() => {
-    filters();
-  }, [titleRef, categoryRef, carsList]);
 
   return (
     <>
@@ -250,35 +255,22 @@ const Buys = () => {
 
         {/* Seccion principal */}
         <section className={buysModule.main_section}>
-          {carsFilterList.length == 0 && carsList.length > 1 ? (
-            <span>No se encontraron resultados</span>
+          {carsFilterList.length == 0 && products.length > 1 ? (
+            <NotFound />
           ) : (
             ""
           )}
+          {products.length == 0 ? <Loader /> : ""}
           {carsFilterList
-            .map(
-              (
-                { id, title, price, description, category, image, rating },
-                index
-              ) => (
-                <Card
-                  key={id}
-                  ID={id}
-                  title={title}
-                  price={price}
-                  description={description}
-                  category={category}
-                  image={image}
-                  rating={rating}
-                />
-              )
-            )
+            .map((product, index) => (
+              <Card key={product.id} product={product} action={dispatch} />
+            ))
             .slice(firstIndexSlice, lastIndexSlice)}
         </section>
         {/* Seccion para la paginacion */}
         <section className={buysModule.pagination}>
-          {carsList.length == 0 ? (
-            <span>Cargando...</span>
+          {products.length == 0 ? (
+            ""
           ) : (
             <PaginationComponent
               key={0}

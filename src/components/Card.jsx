@@ -7,12 +7,20 @@ import { faHeart as faHeartHover } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 //Components
 import Button from "./Button";
+//Redux - cartSlice
+import { addProductToCart } from "../redux/slices/cartSlice";
 
-const Card = ({ ID, title, price, description, category, image, rating }) => {
+const Card = ({ product, action }) => {
+  //Product
+  const { ID, title, price, description, category, image, rating } = product;
+  //State
   const [isBought, setIsBought] = useState(false);
   const [isInFavorite, setIsInFavorite] = useState(false);
 
-  const handleChangeBought = () => setIsBought(true);
+  const handleChangeBought = () => {
+    setIsBought(true);
+    action(addProductToCart(product));
+  };
 
   return (
     <article className={cardModule.card}>
@@ -55,19 +63,18 @@ const Card = ({ ID, title, price, description, category, image, rating }) => {
         </div>
       </div>
       <div className={cardModule.card_action}>
-        {isBought ? <Button text="Ver carrito" classes="blue" /> : ""}
-        <Button
-          handleEvent={handleChangeBought}
-          text={isBought ? "Añadir otro" : "Comprar"}
-          classes={isBought ? "green" : "blue"}
-        />
-        {!isBought ? (
-          <span className={cardModule.card_price}>
-            <strong>${price}</strong>
-          </span>
+        {isBought ? (
+          <Button text="Ver carrito" classes="green" />
         ) : (
-          ""
+          <Button
+            handleEvent={handleChangeBought}
+            text={isBought ? "Añadir otro" : "Comprar"}
+            classes={isBought ? "green" : "blue"}
+          />
         )}
+        <span className={cardModule.card_price}>
+          <strong>${price}</strong>
+        </span>
       </div>
     </article>
   );
