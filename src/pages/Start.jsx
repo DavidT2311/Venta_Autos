@@ -14,6 +14,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCar } from "@fortawesome/free-solid-svg-icons";
 import { faShop } from "@fortawesome/free-solid-svg-icons";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { faInstagram } from "@fortawesome/free-brands-svg-icons";
 
 const start = () => {
   const [carsList, setCarList] = useState([]);
@@ -31,7 +32,13 @@ const start = () => {
           <img src={Fondojfif} alt="" className={startModule.img} />
           <p className={startModule.p}>Automoviles</p>
           <span>41.156 Ofertas</span>
-          <input className={startModule.input_search} type="text" />
+          <br />
+          <input className={startModule.input} type="text" />
+          <FontAwesomeIcon
+            className={startModule.search}
+            icon={faMagnifyingGlass}
+            size="2x"
+          />
         </section>
         <section className={startModule.container_products}>
           <section className={startModule.products}>
@@ -61,15 +68,39 @@ const start = () => {
         <section className={startModule.container_services}>
           <article className={startModule.services}>
             <h1 className={startModule.h1}>
-              Somos un concecionario de compra y venta de autos usados multimarc
-              con presencia en Antioquia, Eje cafetero y bucaramanga
+              En nuestro concesionario, nos enorgullece ofrecer una experiencia
+              de compra única y personalizada para cada uno de nuestros
+              clientes. Contamos con una amplia gama de vehículos nuevos y
+              seminuevos, de las mejores marcas y con garantía de calidad.
+              Nuestro equipo de expertos está siempre disponible para brindarte
+              asesoramiento profesional y ayudarte a encontrar el coche que
+              mejor se ajuste a tus necesidades, preferencias y presupuesto.
+              Además, ofrecemos opciones de financiamiento flexibles para que
+              puedas llevarte el automóvil de tus sueños de manera fácil y
+              accesible. Ven a nuestro concesionario y descubre por qué somos la
+              opción preferida para quienes buscan un servicio de excelencia y
+              vehículos de calidad.
             </h1>
             <h3 className={startModule.h3}>Somos</h3>
             <Button text="Saber mas" classes="yellow" />
+            <FontAwesomeIcon
+              icon={faCar}
+              size="2x"
+              className={startModule.icon}
+            />
+            <FontAwesomeIcon
+              icon={faShop}
+              size="2x"
+              className={startModule.icon}
+            />
+            <FontAwesomeIcon
+              icon={faInstagram}
+              size="2x"
+              color="white"
+              className={startModule.icon}
+            />
           </article>
         </section>
-        <FontAwesomeIcon icon={faCar} className={startModule.service_icon} />
-        <FontAwesomeIcon icon={faShop} className={startModule.shop_icon} />
       </main>
     </>
   );

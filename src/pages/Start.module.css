@@ -10,9 +10,6 @@
   gap: 35px;
 }
 
-.input_search{
-  left: auto;
-}
 
 .container_products {
   display: flex;
@@ -28,31 +25,47 @@
     gap: 40px;
 }
 
-
-.container_services{
+.search{
   display: flex;
-  flex-direction: column;  
-  
+  align-items: center;
+  flex-direction: column;
+}
+
+.input{
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  flex-direction: column;
 }
 
 
-.h1{
-  font-size: 20px;
+.container_services{
+  display: flex;
   flex-direction: column;
+  gap: 40px; 
+  
+}
+
+.h1{
+  font-size: 15px;
+  flex-direction: column;
+  gap: 40px;
+  
 }
 
 .h3{
   color: aqua;
 }
 
-.service_icon{
+.icon{
   color: yellow;
   padding: 0 50px;
-  
+  align-items: center;
+  cursor: pointer;
+ 
 }
-.shop_icon{
-  color: yellow;
-  padding: 0 50px;
-
+.icon:hover{
+  font-size: 40px;
+  transition: all 0.2s ease-in-out;
 
 }
