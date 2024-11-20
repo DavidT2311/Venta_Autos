@@ -9,6 +9,7 @@ const Button = ({ handleEvent, text, classes }) => {
     if (classes == "green") setClassText(buttonModule.green);
     if (classes == "blue") setClassText(buttonModule.blue);
     if (classes == "red") setClassText(buttonModule.red);
+    if (classes == "yellow") setClassText(buttonModule.yellow);
   }, [text]);
 
   return (
