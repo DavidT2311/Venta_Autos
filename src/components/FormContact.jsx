@@ -1,10 +1,10 @@
-import styles from "./FormContact.module.css";
+import FormContactModule from "./FormContact.module.css";
 import Input from "./Input.jsx"
 
 const  FormContact = () => {
     return(
         
-        <div className={styles.form}>
+        <div className={FormContactModule.form}>
             <h2>¡Déjanos un comentario!</h2>
             <Input
             type={"text"}
@@ -24,7 +24,7 @@ const  FormContact = () => {
             name={"nota"}
             place={"Nota:"}
             />
-            <button>Enviar</button>
+            <button className={FormContactModule.btn}>Enviar</button>
         </div>
         
     
