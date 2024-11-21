@@ -29,3 +29,20 @@
   font-size: 20px;
   font-weight: 700;
 }
+
+.modal_header {
+  background-color: var(--violet);
+  border: 2px ridge var(--dark-violet);
+}
+
+.modal_body {
+  border-top: 2px ridge var(--dark-violet);
+  border-left: 2px ridge var(--dark-violet);
+  border-right: 2px ridge var(--dark-violet);
+}
+
+.modal_footer {
+  border-bottom: 2px ridge var(--dark-violet);
+  border-left: 2px ridge var(--dark-violet);
+  border-right: 2px ridge var(--dark-violet);
+}

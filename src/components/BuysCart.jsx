@@ -43,7 +43,7 @@ const BuysCart = ({ show, setShow }) => {
       </motion.article>
 
       <Modal size="xl" show={show} onHide={() => setShow(false)}>
-        <Modal.Header closeButton>
+        <Modal.Header closeButton className={buyscartModule.modal_header}>
           <Modal.Title>Productos</Modal.Title>
         </Modal.Header>
         <Modal.Body
@@ -53,12 +53,13 @@ const BuysCart = ({ show, setShow }) => {
             justifyContent: "center",
             gap: "50px",
           }}
+          className={buyscartModule.modal_body}
         >
           {cartProducts.map((item, index) => (
             <CardInCart key={index} product={item} action={dispatch} />
           ))}
         </Modal.Body>
-        <Modal.Footer>
+        <Modal.Footer className={buyscartModule.modal_footer}>
           <Button
             text="Limpiar carrito"
             classes="yellow"
