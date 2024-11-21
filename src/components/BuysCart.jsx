@@ -12,16 +12,19 @@ import { motion } from "framer-motion";
 //Bootstrap - Modal
 import Modal from "react-bootstrap/Modal";
 //Redux - cartSlice
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addProductToCart,
+  deleteProductFromCart,
+  clearCart,
+} from "../redux/slices/cartSlice";
 
-const BuysCart = ({ totalProducts }) => {
-  const [show, setShow] = useState(false);
-  const { cartProducts } = useSelector((state) => state.cartProducts);
-
-  const handleShowCartPage = () => {
-    setShow(true);
-    console.log(cartProducts);
-  };
+const BuysCart = ({ show, setShow }) => {
+  //Redux - carSlice
+  const { cartProducts, totalProducts } = useSelector(
+    (state) => state.cartProducts
+  );
+  const dispatch = useDispatch();
 
   return (
     <>
@@ -30,23 +33,37 @@ const BuysCart = ({ totalProducts }) => {
         whileHover={{ scale: 1.2 }}
         whileTap={{ scale: 0.9 }}
         transition={{ type: "spring", stiffness: 400, damping: 17 }}
-        onClick={handleShowCartPage}
+        onClick={() => setShow(true)}
       >
-        <span>{totalProducts}</span>
+        <div className={buyscartModule.total_products_container}>
+          <span className={buyscartModule.total_products}>{totalProducts}</span>
+        </div>
         <span className={buyscartModule.text}>Ver carrito</span>
         <FontAwesomeIcon icon={faCartShopping} size="2x" color="mediumpurple" />
       </motion.article>
 
-      <Modal show={show} onHide={() => setShow(false)}>
+      <Modal size="xl" show={show} onHide={() => setShow(false)}>
         <Modal.Header closeButton>
           <Modal.Title>Productos</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body
+          style={{
+            display: "flex",
+            flexFlow: "row wrap",
+            justifyContent: "center",
+            gap: "50px",
+          }}
+        >
           {cartProducts.map((item, index) => (
-            <CardInCart key={index} product={item} />
+            <CardInCart key={index} product={item} action={dispatch} />
           ))}
         </Modal.Body>
         <Modal.Footer>
+          <Button
+            text="Limpiar carrito"
+            classes="yellow"
+            handleEvent={() => dispatch(clearCart())}
+          />
           <Button
             text="Cerrar"
             classes="red"

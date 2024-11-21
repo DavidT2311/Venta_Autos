@@ -10,7 +10,7 @@ import Button from "./Button";
 //Redux - cartSlice
 import { addProductToCart } from "../redux/slices/cartSlice";
 
-const Card = ({ product, action }) => {
+const Card = ({ product, action, setShow }) => {
   //Product
   const { ID, title, price, description, category, image, rating } = product;
   //State
@@ -64,17 +64,29 @@ const Card = ({ product, action }) => {
       </div>
       <div className={cardModule.card_action}>
         {isBought ? (
-          <Button text="Ver carrito" classes="green" />
+          <Button
+            text="Ver carrito"
+            classes="green"
+            handleEvent={() => setShow(true)}
+          />
         ) : (
           <Button
             handleEvent={handleChangeBought}
-            text={isBought ? "Añadir otro" : "Comprar"}
-            classes={isBought ? "green" : "blue"}
+            text={isBought ? "" : "Comprar"}
+            classes={isBought ? "" : "blue"}
           />
         )}
-        <span className={cardModule.card_price}>
-          <strong>${price}</strong>
-        </span>
+        {!isBought ? (
+          <span className={cardModule.card_price}>
+            <strong>${price}</strong>
+          </span>
+        ) : (
+          <Button
+            handleEvent={handleChangeBought}
+            text={isBought ? "Añadir otro" : ""}
+            classes={isBought ? "blue" : ""}
+          />
+        )}
       </div>
     </article>
   );

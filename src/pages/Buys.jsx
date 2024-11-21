@@ -20,6 +20,9 @@ import { fetchProducts } from "../redux/slices/productsSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 const Buys = () => {
+  //Mostrar carrito de compras
+  const [show, setShow] = useState(false);
+
   //Redux - productsSlice
   const { products, loading } = useSelector((state) => state.products);
   const dispatch = useDispatch();
@@ -249,7 +252,7 @@ const Buys = () => {
               reference={rateRef}
               action={filters}
             />
-            <BuysCart />
+            <BuysCart show={show} setShow={setShow} />
           </section>
         </section>
 
@@ -263,7 +266,12 @@ const Buys = () => {
           {products.length == 0 ? <Loader /> : ""}
           {carsFilterList
             .map((product, index) => (
-              <Card key={product.id} product={product} action={dispatch} />
+              <Card
+                key={product.id}
+                product={product}
+                action={dispatch}
+                setShow={setShow}
+              />
             ))
             .slice(firstIndexSlice, lastIndexSlice)}
         </section>
