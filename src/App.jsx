@@ -7,9 +7,10 @@ import Layout from "./components/Layout";
 import Buys from "./pages/Buys";
 import Start from "./pages/Start";
 import Contact from "./pages/Contact";
-import FormBuy from "./pages/FormBuy"
+import FormBuy from "./pages/FormBuy";
 //React-router-Dom
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Login from "./pages/Login";
 
 const router = createBrowserRouter(
   [
@@ -23,6 +24,7 @@ const router = createBrowserRouter(
         { path: "formbuy", element: <FormBuy /> },
       ],
     },
+    { path: "login", element: <Login /> },
   ],
   {
     future: {
