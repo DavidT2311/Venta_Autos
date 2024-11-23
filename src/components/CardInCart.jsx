@@ -52,7 +52,7 @@ const CardInCart = ({ product, action }) => {
           handleEvent={() => action(deleteProductFromCart(product))}
         />
         <span className={cardincartModule.card_price}>
-          <strong>${price}</strong>
+          <strong>${(price * quantity).toFixed(2)}</strong>
         </span>
       </div>
     </article>

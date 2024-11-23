@@ -39,6 +39,7 @@
   gap: 20px;
   grid-area: Logout;
   justify-self: end;
+  text-decoration: none;
 }
 
 .logout_text {

@@ -1,4 +1,4 @@
-import react, { useState } from "react";
+import react, { useEffect, useState } from "react";
 //Styles
 import buyscartModule from "./BuysCart.module.css";
 //Components
@@ -21,7 +21,7 @@ import {
 
 const BuysCart = ({ show, setShow }) => {
   //Redux - carSlice
-  const { cartProducts, totalProducts } = useSelector(
+  const { cartProducts, totalProducts, totalPrice } = useSelector(
     (state) => state.cartProducts
   );
   const dispatch = useDispatch();
@@ -60,15 +60,18 @@ const BuysCart = ({ show, setShow }) => {
           ))}
         </Modal.Body>
         <Modal.Footer className={buyscartModule.modal_footer}>
+          <span className={buyscartModule.price}>
+            $ {totalPrice.toFixed(2)}
+          </span>
           <Button
             text="Limpiar carrito"
             classes="yellow"
             handleEvent={() => dispatch(clearCart())}
           />
           <Button
-            text="Cerrar"
-            classes="red"
-            handleEvent={() => setShow(false)}
+            text="Pagar"
+            classes="blue"
+            handleEvent={() => {}} //Boton para pagar ------------------------
           />
         </Modal.Footer>
       </Modal>
