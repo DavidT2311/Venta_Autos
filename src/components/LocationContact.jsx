@@ -3,22 +3,26 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
 import LocationContactModule from './LocationContact.module.css';
 
-export const Ubicacion = ({ nombre }) => {
-  return (
-    <div className={LocationContactModule.ubicacioncontainer}>
-      <FontAwesomeIcon icon={faMapMarkerAlt} size="2x" />
-      <span className="ubicacionnombre">{nombre}</span>
-    </div>
-  );
-};
+
+
+
+//separar componentes
+//manejar los maps globales
 
 const ListaDeUbicaciones = () => {
   return (
     <div className={LocationContactModule.ubicacioneslista}>
         <h1>Nuestras sedes</h1>
-      <Ubicacion nombre={"Sabaneta"} />
-      <Ubicacion nombre={"Medellin"} />
-      <Ubicacion nombre={"Bello"} />
+      <p>
+      <FontAwesomeIcon icon={faMapMarkerAlt} size="2x" />Sabaneta
+      </p>
+      <p>
+      <FontAwesomeIcon icon={faMapMarkerAlt} size="2x" />Medellin
+      </p>
+      <p>
+      <FontAwesomeIcon icon={faMapMarkerAlt} size="2x" />Bello
+      </p>
+      
       
     </div>
   );

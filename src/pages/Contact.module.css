@@ -1,14 +1,27 @@
-.title{
-    color: rgb(116, 114, 252);
-    text-align: center;
+.body{
+    background-color: rgb(228, 226, 226);
 }
 
+.title{
+    color: rgb(116, 114, 252);
+    
+}
+
+@keyframes bounce {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+}
 
 .logo{
     position: relative;
-    top: -140px;
-    left: 460px;
+    top: -220px;
+    left: 100px;
     width: 400px;
     height: 220px;  
     border-radius: 10%;  
+    animation: bounce 2s infinite;
 }
