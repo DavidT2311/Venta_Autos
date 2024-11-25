@@ -9,6 +9,8 @@
     height: 300px;
     background: var(--violet);
     border-radius: 5px;
+    top: 350px;
+    left: 100px;
   }
   
   .ubicacioncontainer {

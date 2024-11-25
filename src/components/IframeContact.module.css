@@ -1,25 +1,26 @@
 .container{
     position: relative;
-    width: 100px;
+    display: flex;
+    width: 400px;
+    height: 200px;
     
 }
 .imagen2{
-    position: relative;
-    top: -180px;
-    left: 40px;
+    position: absolute;
+    top: -380px;
+    left: 100px;
     width: 450px;
-    height: 160px;  
-    border-radius: 10%;  
+    height: 300px;  
 }
 
 .nombre{
     position: relative;
-    left: 150px;
-    top: -270px;
+    left: 120px;
+    top: -450px;
 }
 
 .icon{
     position: relative;
-    left: 150px;
-    top: -270px;
+    left: 110px;
+    top: -460px;
 }
