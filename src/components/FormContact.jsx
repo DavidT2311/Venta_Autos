@@ -1,9 +1,20 @@
 import FormContactModule from "./FormContact.module.css";
+import Swal from 'sweetalert2/dist/sweetalert2.js'
+import 'sweetalert2/src/sweetalert2.scss'
 import Button from "./Button.jsx"
 import Input from "./Input.jsx"
 
 
 const  FormContact = () => {
+    const handleAlert = () =>{
+        Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "¡Nota enviada con exito!",
+            showConfirmButton: false,
+            timer: 1500
+          });
+    }
     return(
         
         <div className={FormContactModule.form}>
@@ -29,7 +40,7 @@ const  FormContact = () => {
             name={"nota"}
             place={"Nota:"}
             />
-            <Button text="Enviar" classes="blue" />
+            <Button text="Enviar" classes="yellow" handleEvent={handleAlert} />
         </div>
         
     

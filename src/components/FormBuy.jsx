@@ -7,6 +7,9 @@ import Input from "./Input";
 const Form = () => {
     return (
     <>
+    <div>
+
+    
         <h1>Pago eléctronico</h1>
     <Input
     type={"text"}
@@ -39,8 +42,9 @@ const Form = () => {
     place={"Fecha:"}
     />
     <button>Enviar</button>
+    </div>
     </>
-      
+    
     )
     
 }
