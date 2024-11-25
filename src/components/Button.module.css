@@ -37,18 +37,37 @@
   cursor: pointer;
 }
 
+.red {
+  background-color: var(--red);
+  color: white;
+  width: 135px;
+  height: 30px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 8px;
+  border: 3px solid #b93535;
+  transition: all 0.3s ease-out;
+  cursor: pointer;
+  margin: 5px 5px;
+}
+
+.red:hover {
+  background-color: transparent;
+  color: #b93535;
+}
+
 .yellow {
   background-color: #faea11;
   color: black;
   width: 135px;
   height: 30px;
   font-size: 16px;
+  font-weight: 600;
   border-radius: 8px;
   border: 3px solid #dfd21a;
   transition: all 0.3s ease-out;
   cursor: pointer;
   margin: 5px 5px;
-
 }
 
 .yellow:hover {
@@ -57,51 +76,3 @@
   transition: all 0.4s ease-out;
   cursor: pointer;
 }
-
-/* 
-.yellow {
-  background-color: #faea11;
-  color: rgb(0, 0, 0);
-  width: 135px;
-  height: 30px;
-  font-size: 16px;
-  font-weight: 600;
-  border-radius: 7px;
-  border: solid #f7e92e;
-  transition: all 0.3s ease-out;
-  cursor: pointer;
-  margin: 5px 5px;
-  left: 0;
-  right: 0;
-  top: 90%;
-  bottom: 0;
-  margin: auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 15px;
-}
-
-.yellow:hover {
-  background-color: transparent;
-  color: #000000;
-}
-
-.yellow2 {
-  background-color: #faea11;
-  color: rgb(0, 0, 0);
-  width: 135px;
-  height: 30px;
-  font-size: 16px;
-  font-weight: 600;
-  border-radius: 7px;
-  border: solid #f7e92e;
-  transition: all 0.3s ease-out;
-  cursor: pointer;
-  margin: 5px 5px;
-}
-
-.yellow2:hover {
-  background-color: transparent;
-  color: #000000;
-} */

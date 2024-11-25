@@ -1,8 +1,10 @@
 import { combineReducers } from "redux";
 import cartSlice from "./slices/cartSlice";
+import productsSlice from "./slices/productsSlice";
 
 const reducer = combineReducers({
-  products: cartSlice,
+  products: productsSlice,
+  cartProducts: cartSlice,
 });
 
 export default reducer;

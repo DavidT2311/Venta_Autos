@@ -40,6 +40,7 @@
   border-top: 2px ridge var(--dark-violet);
   border-left: 2px ridge var(--dark-violet);
   border-right: 2px ridge var(--dark-violet);
+  background-color: whitesmoke;
 }
 
 .modal_footer {

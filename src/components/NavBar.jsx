@@ -33,14 +33,14 @@ const Navbar = () => {
           </li>
         </Link>
       </ul>
-      <div className={navbarModule.logout_container}>
-        <span className={navbarModule.logout_text}>Salir</span>
+      <Link to={"login/"} className={navbarModule.logout_container}>
+        <span className={navbarModule.logout_text}>Ingresar</span>
         <FontAwesomeIcon
           icon={faCircleUser}
           size="3x"
           className={navbarModule.logout_icon}
         />
-      </div>
+      </Link>
     </nav>
   );
 };
