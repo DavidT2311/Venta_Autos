@@ -1,27 +1,50 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 //Styles
 import loginModule from "./Login.module.css";
 //Components
 import Button from "../components/Button";
 //React - BootStrap
 import { CloseButton, Form, Modal } from "react-bootstrap";
+//React-Router-Dom
 import { useNavigate } from "react-router-dom";
+//Redux
+import { authUser, validateUser } from "../redux/slices/userSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 const Login = () => {
+  //Navegacion entre componentes
   const navigate = useNavigate();
+
   //Referencia del login
-  const userRef = useRef(null);
+  const emailRef = useRef(null);
   const passRef = useRef(null);
+
+  //Redux - userSlice
+  const { loading, email, token } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (token && loading == "succeeded") navigate("/admin");
+  }, [loading, token, dispatch]);
 
   const handleLogin = (e) => {
     e.preventDefault();
-    if (userRef != null && userRef.current.value != "") {
-      console.log(userRef.current.value);
+    if (!(emailRef != null && emailRef.current.value != "")) {
+      return;
     }
-    if (passRef != null && passRef.current.value != "") {
-      console.log(passRef.current.value);
+    if (!(passRef != null && passRef.current.value != "")) {
+      return;
     }
-    userRef.current.value = "";
+
+    if (loading == "idle") console.log(loading);
+    dispatch(
+      validateUser({
+        email: emailRef.current.value,
+        password: passRef.current.value,
+      })
+    );
+
+    emailRef.current.value = "";
     passRef.current.value = "";
   };
 
@@ -43,11 +66,11 @@ const Login = () => {
         >
           <Form className="w-100 px-4">
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label>Usuario</Form.Label>
+              <Form.Label>Email</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="Digite el usuario"
-                ref={userRef}
+                ref={emailRef}
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="Usuario">
