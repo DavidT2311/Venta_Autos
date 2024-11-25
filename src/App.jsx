@@ -11,6 +11,7 @@ import FormBuy from "./pages/FormBuy";
 //React-router-Dom
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Login from "./pages/Login";
+import AdminProducts from "./pages/AdminProducts";
 
 const router = createBrowserRouter(
   [
@@ -24,7 +25,11 @@ const router = createBrowserRouter(
         { path: "formbuy", element: <FormBuy /> },
       ],
     },
-    { path: "login", element: <Login /> },
+    {
+      path: "admin",
+      element: <login />,
+      children: [{ path: "products", element: <AdminProducts /> }],
+    },
   ],
   {
     future: {

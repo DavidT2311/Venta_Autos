@@ -14,15 +14,19 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCar } from "@fortawesome/free-solid-svg-icons";
 import { faShop } from "@fortawesome/free-solid-svg-icons";
 import { faUsersViewfinder } from "@fortawesome/free-solid-svg-icons";
+//Redux
+import { useDispatch, useSelector } from "react-redux";
+import { fetchProducts } from "../redux/slices/productsSlice";
+import { useNavigate } from "react-router";
 
 const start = () => {
-  const [carsList, setCarList] = useState([]);
+  const { products, loading } = useSelector((state) => state.products);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    getProducts().then((data) => {
-      setCarList(data);
-    });
-  }, []);
+    if (loading == "idle") dispatch(fetchProducts());
+  }, [loading, dispatch]);
 
   return (
     <>
@@ -36,24 +40,14 @@ const start = () => {
         </section>
         <section className={startModule.container_products}>
           <section className={startModule.products}>
-            {carsList
-              .map(
-                (
-                  { id, title, price, description, category, image, rating },
-                  index
-                ) => (
-                  <Card
-                    key={id}
-                    ID={id}
-                    title={title}
-                    price={price}
-                    description={description}
-                    category={category}
-                    image={image}
-                    rating={rating}
-                  />
-                )
-              )
+            {products
+              .map((item, index) => (
+                <Card
+                  key={index}
+                  product={item}
+                  action={() => navigate("products")}
+                />
+              ))
               .slice(0, 6)}
           </section>
           <Button text="Mostrar mas" classes="yellow"></Button>
