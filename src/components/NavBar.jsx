@@ -17,10 +17,10 @@ const Navbar = () => {
         <Link to={"/"}>
           <li className={navbarModule.item}>Inicio</li>
         </Link>
-        <Link to={"products/"}>
+        <Link to={"products"}>
           <li className={navbarModule.item}>Productos</li>
         </Link>
-        <Link to={"contact/"}>
+        <Link to={"contact"}>
           <li className={navbarModule.item}>Contactanos</li>
         </Link>
         <Link to="#">
@@ -33,7 +33,7 @@ const Navbar = () => {
           </li>
         </Link>
       </ul>
-      <Link to={"login/"} className={navbarModule.logout_container}>
+      <Link to={"login"} className={navbarModule.logout_container}>
         <span className={navbarModule.logout_text}>Ingresar</span>
         <FontAwesomeIcon
           icon={faCircleUser}
