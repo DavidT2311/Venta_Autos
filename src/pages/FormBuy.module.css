@@ -1,0 +1,19 @@
+.containerP{
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    text-align: center;
+    background-color: #656565; 
+    padding: 80px;
+}
+
+
+.pago{
+    display: flex;
+    justify-content: right;
+    align-items: right;
+    text-align: right;
+    background-color: #656565; 
+    padding: 80px;
+}
+
