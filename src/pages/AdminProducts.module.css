@@ -1,19 +1,15 @@
 .header{
     position: relative;
     background-color: rgb(225, 255, 249);
-    border-color: black 20 10px;
+    border-color: #000000 20 10px;
     height: 70px;
     box-shadow: rgba(100, 100, 100, 0.23) 0 40px 40px -20px;
 }
 
 .logout_container {
     position: absolute;
-    display: flex;
     align-items: center;
     gap: 20px;
-    grid-area: Logout;
-    justify-self: end;
-    text-decoration: none;
     padding: 0 30px;
     top: 0;
     right: 0;
@@ -23,6 +19,7 @@
 .logout_text {
     font-size: 20px;
     font-weight: 600;
+
    
 }
 
