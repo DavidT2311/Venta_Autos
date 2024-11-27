@@ -1,16 +1,19 @@
 import React from "react";
 import FormBuyModule from "./FormBuy.module.css";
-import {initialState} from "../redux/slices/cartSlice"
 import { useNavigate } from "react-router";
-import Swal from 'sweetalert2/dist/sweetalert2.js'
-import 'sweetalert2/src/sweetalert2.scss'
+import Swal from 'sweetalert2/dist/sweetalert2.js';
+import { useDispatch } from "react-redux";
+import 'sweetalert2/src/sweetalert2.scss';
+import {clearCart} from "../redux/slices/cartSlice";
 //componentes
 import Input from "./Input";
 import Button from "./Button"
 
 
 const Form = () => {
+
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const handleAlert = () =>{
         Swal.fire({
@@ -22,13 +25,15 @@ const Form = () => {
             
         });
         navigate("/products"); 
+        dispatch(clearCart());
+        
     }
     return (
     <>
     <div className={FormBuyModule.containerH}>
 
     
-        <h1>Pago eléctronico{initialState.totalprice}</h1>
+        <h1>Pago eléctronico</h1>
     <Input
     type={"text"}
     id={"nombre"}

@@ -4,12 +4,15 @@
     align-items: center;
     text-align: center;
     background-color: #656565; 
-    padding: 80px;
+    padding: 30px;
 }
 
-
+.price{
+    font-size: 40px;
+    color: rgb(255, 255, 255);
+}
 .pago{
-    display: flex;
+    display:block;
     justify-content: right;
     align-items: right;
     text-align: right;
@@ -17,3 +20,34 @@
     padding: 80px;
 }
 
+.carouselContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: right;
+    align-items: center;
+    gap: 10px;
+}
+  
+.arrow {
+    background-color: var(--red);
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 18px;
+}
+  
+.arrow:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+  
+.carousel {
+    max-height: 520px; /* Ajusta según tus necesidades */
+    overflow: hidden;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
