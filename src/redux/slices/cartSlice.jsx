@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-
 const initialState = {
   cartProducts: [],
   totalProducts: 0,
@@ -52,7 +51,6 @@ const cartSlice = createSlice({
 export default cartSlice.reducer;
 export const { addProductToCart, deleteProductFromCart, clearCart } =
   cartSlice.actions;
-export { initialState };
 
 //---Carrito de compras---
 //Agregar un producto o existencia
