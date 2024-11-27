@@ -1,0 +1,75 @@
+.header {
+  height: 70px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(133px, 1fr));
+  grid-template-areas: "- Title Logout";
+  align-items: center;
+  justify-content: space-between;
+  padding: 0px 30px;
+  min-width: 100%;
+  background-color: var(--dark-blue);
+  box-shadow: rgba(50, 50, 93, 0.23) 0 30px 30px -20px;
+  box-sizing: border-box;
+}
+
+.header_title {
+  grid-area: Title;
+  color: white;
+  font-size: 30px;
+  font-weight: 700;
+  justify-self: center;
+}
+
+.logout_container {
+  grid-area: Logout;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  grid-area: Logout;
+  justify-self: end;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.logout_text {
+  font-size: 19px;
+  font-weight: 600;
+  color: white;
+}
+
+.main {
+  margin-top: 60px;
+  margin-bottom: 60px;
+}
+
+.products_section {
+  margin: 40px 0;
+}
+
+.table_header {
+  height: 40px;
+  color: white;
+  text-align: center;
+  background-color: var(--light-blue);
+  border: 0;
+  border-bottom: 1px solid white;
+}
+
+.tb_title {
+  padding: 5px 10px;
+  min-width: 130px;
+}
+
+.table_body {
+  background-color: whitesmoke;
+  text-align: justify;
+}
+
+.tb_body {
+  padding: 5px 10px;
+  border-bottom: 3px solid white;
+}
+
+.tb_number {
+  text-align: center;
+}
