@@ -8,7 +8,7 @@ import { CloseButton, Form, Modal } from "react-bootstrap";
 //React-Router-Dom
 import { useNavigate } from "react-router-dom";
 //Redux
-import { authUser, validateUser } from "../redux/slices/userSlice";
+import { fetchToken, fetchUser } from "../redux/slices/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 const Login = () => {
@@ -24,7 +24,10 @@ const Login = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (token && loading == "succeeded") navigate("/admin");
+    if (token && loading == "succeeded") {
+      dispatch(fetchUser(token));
+      navigate("/admin");
+    }
   }, [loading, token, dispatch]);
 
   const handleLogin = (e) => {
@@ -38,7 +41,7 @@ const Login = () => {
 
     if (loading == "idle") console.log(loading);
     dispatch(
-      validateUser({
+      fetchToken({
         email: emailRef.current.value,
         password: passRef.current.value,
       })

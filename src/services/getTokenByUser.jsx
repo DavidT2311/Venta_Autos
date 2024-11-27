@@ -10,7 +10,7 @@ const getTokenByUser = async (user) => {
     if (!data.ok) throw new Error("Ha ocurrido un error obteniendo el usuario");
 
     const json = await data.json();
-    return { json, email: user.email };
+    return json;
   } catch (e) {
     console.log(e);
   }

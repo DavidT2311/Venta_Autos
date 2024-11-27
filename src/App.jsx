@@ -11,7 +11,7 @@ import FormBuy from "./pages/FormBuy";
 import Login from "./pages/Login";
 //React-router-Dom
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import AdminProducts from "./pages/AdminProducts";
+import AdminProducts from "./pages/admin/AdminProducts";
 
 const router = createBrowserRouter(
   [
