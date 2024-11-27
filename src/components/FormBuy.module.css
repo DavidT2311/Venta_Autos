@@ -1,0 +1,12 @@
+.containerH{
+    
+    background-color: var(--dark-violet);
+    width: 600px;
+    height: 500px;
+    text-align: center;
+    border-radius: 10px; /* Opcional: estilo adicional */
+    padding: 20px;
+    color: white; /* Contraste para texto sobre el fondo oscuro */
+}
+
+

@@ -1,4 +1,5 @@
 import react, { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
 //Styles
 import buyscartModule from "./BuysCart.module.css";
 //Components
@@ -25,6 +26,11 @@ const BuysCart = ({ show, setShow }) => {
     (state) => state.cartProducts
   );
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  
+  const handleRedirectFormBuy = () => {
+    navigate("/formbuy"); 
+  };
 
   return (
     <>
@@ -71,7 +77,7 @@ const BuysCart = ({ show, setShow }) => {
           <Button
             text="Pagar"
             classes="blue"
-            handleEvent={() => {}} //Boton para pagar ------------------------
+            handleEvent={handleRedirectFormBuy} //Boton para pagar ------------------------
           />
         </Modal.Footer>
       </Modal>
