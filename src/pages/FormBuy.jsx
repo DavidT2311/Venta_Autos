@@ -10,7 +10,7 @@ import CardInCart from "../components/CardInCart";
 
 //Componentes
 import Form from "../components/FormBuy"
-import { Button } from "bootstrap";
+
 
 const FormBuy = () => {
   const { cartProducts, totalPrice } = useSelector(

@@ -29,15 +29,16 @@
 }
 
 .arrow {
-    background-color: var(--red);
+    background-color: var(--dark-blue);
     color: white;
     border: none;
-    padding: 10px;
-    border-radius: 50%;
+    padding: 15px;
+    border-radius: 20%;
     cursor: pointer;
     font-size: 18px;
+    width: 80px;
 }
-  
+
 .arrow:disabled {
     background-color: #ccc;
     cursor: not-allowed;
