@@ -22,7 +22,7 @@ const FormCreateProduct = () => {
     setErrors({});
   };
 
-  const validate = () => {
+  const handlevalidate = () => {
     const newErrors = {};
 
     if (!titleRef.current.value.trim()) {
@@ -175,7 +175,7 @@ const FormCreateProduct = () => {
           <Button variant="secondary" onClick={handleClose}>
             Cerrar
           </Button>
-          <Button variant="primary" onClick={validate} disabled={loading}>
+          <Button variant="primary" onClick={handlevalidate} disabled={loading}>
             {loading ? (
               <Spinner as="span" animation="border" size="sm" />
             ) : (
