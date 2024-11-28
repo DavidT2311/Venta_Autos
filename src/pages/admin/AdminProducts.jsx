@@ -1,5 +1,6 @@
-import { main, tr } from "motion/react-client";
+import { div, main, tr } from "motion/react-client";
 import React, { useEffect } from "react";
+import FormCreateProduct from "../../components/CreateProduct";
 //Style
 import adminproductsModule from "./AdminProducts.module.css";
 //Font-Awesome
@@ -25,6 +26,8 @@ const AdminProducts = () => {
   }, [loading, dispatch]);
 
   return (
+      <>
+      
     <Container>
       <header className={adminproductsModule.header}>
         <span className={adminproductsModule.header_title}>Dashboard</span>
@@ -42,6 +45,7 @@ const AdminProducts = () => {
         <h1 className={adminproductsModule.products_title}>Productos</h1>
         <section className={adminproductsModule.products_section}>
           <article>
+          <FormCreateProduct/>
             {/* Aca va la barra de buscar y el boton de agregar */}
           </article>
           <article>
@@ -87,6 +91,7 @@ const AdminProducts = () => {
         </section>
       </main>
     </Container>
+    </>
   );
 };
 
