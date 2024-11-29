@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import { Modal, Form, Button, Spinner } from "react-bootstrap";
 
-const FormCreateProduct = () => {
+const FormCreateProduct = ({ title, TxtBtn }) => {
   const titleRef = useRef();
   const priceRef = useRef();
   const descriptionRef = useRef();
@@ -11,8 +11,6 @@ const FormCreateProduct = () => {
   const countRef = useRef();
 
   const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState(""); 
-  const [messageType, setMessageType] = useState(""); 
   const [showModal, setShowModal] = useState(false);
   const [errors, setErrors] = useState({});
 
@@ -57,7 +55,6 @@ const FormCreateProduct = () => {
     }
 
     setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
   };
 
   return (
@@ -66,13 +63,13 @@ const FormCreateProduct = () => {
 
       <div className="d-flex justify-content-end mb-3">
         <Button variant="secondary" onClick={handleShow}>
-          Agregar Nuevo Producto
+          {TxtBtn}
         </Button>
       </div>
 
       <Modal show={showModal} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Crear Producto</Modal.Title>
+          <Modal.Title>{title}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>

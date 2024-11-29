@@ -19,7 +19,9 @@ const AdminProducts = () => {
     (state) => state.user
   );
 
-  const { products, loading } = useSelector((state) => state.products);
+  const { products, loading 
+    
+  } = useSelector((state) => state.products);
 
   useEffect(() => {
     if (loading == "idle") dispatch(fetchProducts());
@@ -45,7 +47,7 @@ const AdminProducts = () => {
         <h1 className={adminproductsModule.products_title}>Productos</h1>
         <section className={adminproductsModule.products_section}>
           <article>
-          <FormCreateProduct/>
+          <FormCreateProduct title={"Agregar producto"} TxtBtn={"Agregar nuevo producto"}/>
             {/* Aca va la barra de buscar y el boton de agregar */}
           </article>
           <article>
