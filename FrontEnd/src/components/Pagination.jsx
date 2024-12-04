@@ -6,6 +6,7 @@ const PaginationComponent = ({
   setCurrentPage,
   quantityOfProducts,
   quantityProductsPerPage,
+  reference,
 }) => {
   const pageList = [];
   const numberOfPages = Math.ceil(quantityOfProducts / quantityProductsPerPage);
@@ -30,7 +31,7 @@ const PaginationComponent = ({
 
   return (
     <div>
-      <Pagination>
+      <Pagination ref={reference}>
         <Pagination.Prev onClick={handlePreviousPage} />
         {pageList.map((item) => (
           <Pagination.Item
