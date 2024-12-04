@@ -1,7 +1,7 @@
 import { useState,useId} from "react";
 import { useDispatch} from "react-redux";
 import { Modal, Form, Button, Spinner} from "react-bootstrap";
-import { createProducts} from "../redux/slices/productsSlice/";
+import { createProduct} from "../redux/slices/productsSlice/";
 
 
 const FormCreateProduct = ({ Txttitle, TxtBtn, TxtBtnIn }) => {
@@ -31,31 +31,24 @@ const FormCreateProduct = ({ Txttitle, TxtBtn, TxtBtnIn }) => {
   };
   
   const validate =  () => {
-  
   const newErrors = {};
-
     if (!title.trim()) {
       newErrors.title = "El título es obligatorio.";
     }
-
     if (!price.trim() && isNaN(price)) {
       newErrors.price = "El precio debe ser un número válido.";
     }
-
     if (!description.trim()) {
       newErrors.description = "La descripción es obligatoria.";
     }
-
     if (!category.trim()) {
       newErrors.category = "La categoría es obligatoria.";
     }
-
     if (
       !image.trim() && !image.startsWith("http")
     ) {
       newErrors.image = "La URL de la imagen debe ser válida.";
     }
-
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   
@@ -63,8 +56,6 @@ const FormCreateProduct = ({ Txttitle, TxtBtn, TxtBtnIn }) => {
   const handleClick =  () => {
     if(!validate()) return;
     const Id = `${baseId}-${counter}`
-    
-
     const newproduct = {
       _id: Id,
       title: title,
@@ -77,13 +68,10 @@ const FormCreateProduct = ({ Txttitle, TxtBtn, TxtBtnIn }) => {
         count: 4,
       }
     };
-    console.log("generador",newproduct)
-    dispatch(createProducts(newproduct));
+    dispatch(createProduct(newproduct));
     setCounter(counter + 1);
-    console.log(counter)
     handleClose()
   };
-
   return (
     <div className="container mt-5">
       <div className="d-flex justify-content-end mb-3">
@@ -91,7 +79,6 @@ const FormCreateProduct = ({ Txttitle, TxtBtn, TxtBtnIn }) => {
           {TxtBtn}
         </Button>
       </div>
-
       <Modal show={showModal} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>{Txttitle}</Modal.Title>
@@ -111,7 +98,6 @@ const FormCreateProduct = ({ Txttitle, TxtBtn, TxtBtnIn }) => {
                 {errors.title}
               </Form.Control.Feedback>
             </Form.Group>
-
             <Form.Group className="mb-3" controlId="formPrice">
               <Form.Label>Precio</Form.Label>
               <Form.Control
@@ -126,7 +112,6 @@ const FormCreateProduct = ({ Txttitle, TxtBtn, TxtBtnIn }) => {
                 {errors.price}
               </Form.Control.Feedback>
             </Form.Group>
-
             <Form.Group className="mb-3" controlId="formDescription">
               <Form.Label>Descripción</Form.Label>
               <Form.Control
@@ -141,7 +126,6 @@ const FormCreateProduct = ({ Txttitle, TxtBtn, TxtBtnIn }) => {
                 {errors.description}
               </Form.Control.Feedback>
             </Form.Group>
-
             <Form.Group className="mb-3" controlId="formCategory">
               <Form.Label>Categoría</Form.Label>
               <Form.Control
@@ -155,7 +139,6 @@ const FormCreateProduct = ({ Txttitle, TxtBtn, TxtBtnIn }) => {
                 {errors.category}
               </Form.Control.Feedback>
             </Form.Group>
-
             <Form.Group className="mb-3" controlId="formImage">
               <Form.Label>URL de la Imagen</Form.Label>
               <Form.Control
