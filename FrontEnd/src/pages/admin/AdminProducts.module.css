@@ -73,3 +73,9 @@
 .tb_number {
   text-align: center;
 }
+
+.pagination_section {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+}
