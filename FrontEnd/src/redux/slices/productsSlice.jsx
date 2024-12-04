@@ -1,6 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-//Services
+
 import getProducts from "../../services/getProducts";
+import createProductsService from "../../services/createProducts";
+
 
 const initialState = {
   loading: "idle",
@@ -11,7 +13,11 @@ const productSlice = createSlice({
   name: "Products",
   initialState,
   reducers: {
-    createProduct: (state, action) => {},
+    createProduct: (state, action) => {
+        const product = { ...action.payload };
+        state.products.push(product);
+
+    },
     uptadeProduct: (state, action) => {},
     deleteProduct: (state, action) => {},
   },
@@ -34,6 +40,10 @@ export const fetchProducts = createAsyncThunk(
   "getProducts",
   async () => await getProducts()
 );
+
+export const createProducts = createAsyncThunk(
+  "createProductsService",
+  async (product) =>  await createProductsService(product) );
 
 export default productSlice.reducer;
 export const { createProduct, uptadeProduct, deleteProduct } =

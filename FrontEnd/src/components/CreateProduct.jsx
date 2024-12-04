@@ -1,66 +1,91 @@
-import React, { useRef, useState } from "react";
-import { Modal, Form, Button, Spinner } from "react-bootstrap";
+import { useState,useId} from "react";
+import { useDispatch} from "react-redux";
+import { Modal, Form, Button, Spinner} from "react-bootstrap";
+import { createProducts} from "../redux/slices/productsSlice/";
 
-const FormCreateProduct = ({ title, TxtBtn }) => {
-  const titleRef = useRef();
-  const priceRef = useRef();
-  const descriptionRef = useRef();
-  const categoryRef = useRef();
-  const imageRef = useRef();
-  const rateRef = useRef();
-  const countRef = useRef();
 
+const FormCreateProduct = ({ Txttitle, TxtBtn, TxtBtnIn }) => {
+  const baseId = useId();
+  const [counter, setCounter] = useState(22);
+  const [title, setTitle] = useState('');
+  const [price, setPrice] = useState('');
+  const [description, setDescription] = useState('');
+  const [category, setCategory] = useState('');
+  const [image, setImage] = useState('');
+
+  const dispatch = useDispatch();
+  
+  
   const [loading, setLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [errors, setErrors] = useState({});
-
   const handleShow = () => setShowModal(true);
   const handleClose = () => {
-    setShowModal(false);
-    setErrors({});
+  setShowModal(false);
+  setErrors({}); 
+  setTitle('');
+  setPrice('');
+  setDescription('');
+  setCategory('');
+  setImage('');
   };
+  
+  const validate =  () => {
+  
+  const newErrors = {};
 
-  const handlevalidate = () => {
-    const newErrors = {};
-
-    if (!titleRef.current.value.trim()) {
+    if (!title.trim()) {
       newErrors.title = "El título es obligatorio.";
     }
 
-    if (!priceRef.current.value.trim() || isNaN(priceRef.current.value)) {
+    if (!price.trim() && isNaN(price)) {
       newErrors.price = "El precio debe ser un número válido.";
     }
 
-    if (!descriptionRef.current.value.trim()) {
+    if (!description.trim()) {
       newErrors.description = "La descripción es obligatoria.";
     }
 
-    if (!categoryRef.current.value.trim()) {
+    if (!category.trim()) {
       newErrors.category = "La categoría es obligatoria.";
     }
 
     if (
-      !imageRef.current.value.trim() ||
-      !imageRef.current.value.startsWith("http")
+      !image.trim() && !image.startsWith("http")
     ) {
       newErrors.image = "La URL de la imagen debe ser válida.";
     }
 
-    if (rateRef.current.value && (isNaN(rateRef.current.value) || rateRef.current.value < 0 || rateRef.current.value > 5)) {
-      newErrors.rate = "La calificación (rate) debe ser un número entre 0 y 5.";
-    }
-
-    if (countRef.current.value && (isNaN(countRef.current.value) || countRef.current.value < 0)) {
-      newErrors.count = "El número de valoraciones (count) debe ser un entero positivo.";
-    }
-
     setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  
+  };
+  const handleClick =  () => {
+    if(!validate()) return;
+    const Id = `${baseId}-${counter}`
+    
+
+    const newproduct = {
+      _id: Id,
+      title: title,
+      price: price,
+      description: description,
+      category: category,
+      image: image,
+      rating: {
+        rate: 1,
+        count: 4,
+      }
+    };
+    console.log("generador",newproduct)
+    dispatch(createProducts(newproduct));
+    setCounter(counter + 1);
+    console.log(counter)
+    handleClose()
   };
 
   return (
     <div className="container mt-5">
-      
-
       <div className="d-flex justify-content-end mb-3">
         <Button variant="secondary" onClick={handleShow}>
           {TxtBtn}
@@ -69,7 +94,7 @@ const FormCreateProduct = ({ title, TxtBtn }) => {
 
       <Modal show={showModal} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>{title}</Modal.Title>
+          <Modal.Title>{Txttitle}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
@@ -78,7 +103,8 @@ const FormCreateProduct = ({ title, TxtBtn }) => {
               <Form.Control
                 type="text"
                 placeholder="Introduce el título"
-                ref={titleRef}
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
                 isInvalid={!!errors.title}
               />
               <Form.Control.Feedback type="invalid">
@@ -92,7 +118,8 @@ const FormCreateProduct = ({ title, TxtBtn }) => {
                 type="number"
                 step="0.01"
                 placeholder="Introduce el precio"
-                ref={priceRef}
+                value={price}
+                onChange={(e) => setPrice(e.target.value)}
                 isInvalid={!!errors.price}
               />
               <Form.Control.Feedback type="invalid">
@@ -106,7 +133,8 @@ const FormCreateProduct = ({ title, TxtBtn }) => {
                 as="textarea"
                 rows={3}
                 placeholder="Introduce la descripción"
-                ref={descriptionRef}
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
                 isInvalid={!!errors.description}
               />
               <Form.Control.Feedback type="invalid">
@@ -119,7 +147,8 @@ const FormCreateProduct = ({ title, TxtBtn }) => {
               <Form.Control
                 type="text"
                 placeholder="Introduce la categoría"
-                ref={categoryRef}
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
                 isInvalid={!!errors.category}
               />
               <Form.Control.Feedback type="invalid">
@@ -132,38 +161,12 @@ const FormCreateProduct = ({ title, TxtBtn }) => {
               <Form.Control
                 type="text"
                 placeholder="Introduce la URL de la imagen"
-                ref={imageRef}
+                value={image}
+                onChange={(e) => setImage(e.target.value)}
                 isInvalid={!!errors.image}
               />
               <Form.Control.Feedback type="invalid">
                 {errors.image}
-              </Form.Control.Feedback>
-            </Form.Group>
-
-            <Form.Group className="mb-3" controlId="formRate">
-              <Form.Label>Calificación (Rate)</Form.Label>
-              <Form.Control
-                type="number"
-                step="0.1"
-                placeholder="Introduce la calificación entre 0-5"
-                ref={rateRef}
-                isInvalid={!!errors.rate}
-              />
-              <Form.Control.Feedback type="invalid">
-                {errors.rate}
-              </Form.Control.Feedback>
-            </Form.Group>
-
-            <Form.Group className="mb-3" controlId="formCount">
-              <Form.Label>Número de comprados (Count)</Form.Label>
-              <Form.Control
-                type="number"
-                placeholder="Introduce el número de valoraciones"
-                ref={countRef}
-                isInvalid={!!errors.count}
-              />
-              <Form.Control.Feedback type="invalid">
-                {errors.count}
               </Form.Control.Feedback>
             </Form.Group>
           </Form>
@@ -172,11 +175,11 @@ const FormCreateProduct = ({ title, TxtBtn }) => {
           <Button variant="secondary" onClick={handleClose}>
             Cerrar
           </Button>
-          <Button variant="primary" onClick={handlevalidate} disabled={loading}>
+          <Button variant="primary" onClick={handleClick} disabled={loading}>
             {loading ? (
               <Spinner as="span" animation="border" size="sm" />
             ) : (
-              "Crear Producto"
+              TxtBtnIn
             )}
           </Button>
         </Modal.Footer>
