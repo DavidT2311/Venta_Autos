@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from "react";
+import { div, main, tr } from "motion/react-client";
+import React, { useEffect } from "react";
+import FormCreateProduct from "../../components/CreateProduct";
 //Style
 import adminproductsModule from "./AdminProducts.module.css";
 //Components
@@ -13,6 +16,7 @@ import { useAutoAnimate } from "@formkit/auto-animate/react";
 //Redux
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../../redux/slices/productsSlice";
+
 
 const AdminProducts = () => {
   //Redux - userSlice
@@ -29,12 +33,15 @@ const AdminProducts = () => {
 
   //Auto-animate
   const [parent] = useAutoAnimate();
+  const { products, loading 
+    
+  } = useSelector((state) => state.products);
 
   useEffect(() => {
     if (loading == "idle") dispatch(fetchProducts());
   }, [loading, dispatch]);
 
-  return (
+  return (      
     <Container>
       <header className={adminproductsModule.header}>
         <span className={adminproductsModule.header_title}>Dashboard</span>
@@ -52,6 +59,7 @@ const AdminProducts = () => {
         <h1 className={adminproductsModule.products_title}>Productos</h1>
         <section className={adminproductsModule.products_section}>
           <article>
+          <FormCreateProduct T={"Agregar producto"} TxtBtn={"Agregar nuevo producto"} TxtBtnIn={"Crear producto"}/>
             {/* Aca va la barra de buscar y el boton de agregar */}
           </article>
           <article>
