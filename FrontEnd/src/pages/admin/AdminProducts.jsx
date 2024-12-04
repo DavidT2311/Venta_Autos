@@ -12,6 +12,7 @@ import { Container, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../../redux/slices/productsSlice";
 
+
 const AdminProducts = () => {
   //Redux - userSlice
   const dispatch = useDispatch();
@@ -47,7 +48,7 @@ const AdminProducts = () => {
         <h1 className={adminproductsModule.products_title}>Productos</h1>
         <section className={adminproductsModule.products_section}>
           <article>
-          <FormCreateProduct title={"Agregar producto"} TxtBtn={"Agregar nuevo producto"}/>
+          <FormCreateProduct T={"Agregar producto"} TxtBtn={"Agregar nuevo producto"} TxtBtnIn={"Crear producto"}/>
             {/* Aca va la barra de buscar y el boton de agregar */}
           </article>
           <article>
