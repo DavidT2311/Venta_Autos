@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { div, main, tr } from "motion/react-client";
-import React, { useEffect } from "react";
 import FormCreateProduct from "../../components/CreateProduct";
 //Style
 import adminproductsModule from "./AdminProducts.module.css";
@@ -10,7 +8,7 @@ import PaginationComponent from "../../components/Pagination";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleUser } from "@fortawesome/free-regular-svg-icons";
 //BootStrap
-import { Container, Table } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 //Auto-Animate
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 //Redux

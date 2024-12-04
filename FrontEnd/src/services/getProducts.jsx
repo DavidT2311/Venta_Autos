@@ -1,6 +1,6 @@
 const getProducts = async () => {
   try {
-    const data = await fetch("https://fakestoreapi.com/products");
+    const data = await fetch("http://127.0.0.1:3000/getProducts");
     if (!data.ok) throw new Error("Ocurrio un error obteniendo los productos");
 
     const json = data.json();
