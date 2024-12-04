@@ -3,14 +3,14 @@ import {
   getProducts,
   updateProducts,
   deleteProducts,
-  createProducts
+  createProducts,
 } from "../controller/ProductsController.js";
 
 const productsRouter = Router();
 
 productsRouter.get("/getProducts", getProducts);
-productsRouter.post("/createProducts", createProducts)
-productsRouter.put("/updateProducts/:id", updateProducts);
-productsRouter.delete("/deleteProducts/:id", deleteProducts);
+productsRouter.post("/createProduct", createProducts);
+productsRouter.put("/updateProduct/:id", updateProducts);
+productsRouter.delete("/deleteProduct/:id", deleteProducts);
 
 export default productsRouter;
