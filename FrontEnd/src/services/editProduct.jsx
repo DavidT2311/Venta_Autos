@@ -1,6 +1,6 @@
 const editProduct = async (id, product) => {
   try {
-    const data = await fetch(`https://fakestoreapi.com/products/${id}`, {
+    const data = await fetch(`http://localhost:3000/updateProduct/${id}`, {
       method: "PUT",
       body: JSON.stringify(product),
     });

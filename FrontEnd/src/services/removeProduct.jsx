@@ -1,6 +1,6 @@
 const removeProduct = async (id) => {
   try {
-    const data = await fetch(`https://fakestoreapi.com/products/${id}`, {
+    const data = await fetch(`http://localhost:3000/deleteProduct/${id}`, {
       method: "DELETE",
     });
     if (!data.ok) throw new Error("Ocurrio un error obteniendo los productos");
