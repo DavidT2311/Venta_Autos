@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
 //Styles
 import loginModule from "./Login.module.css";
 //Components
@@ -8,46 +8,48 @@ import { CloseButton, Form, Modal } from "react-bootstrap";
 //React-Router-Dom
 import { useNavigate } from "react-router-dom";
 //Redux
-import { fetchToken, fetchUser } from "../redux/slices/userSlice";
 import { useDispatch, useSelector } from "react-redux";
+//Cookies
+import { useCookies } from "react-cookie";
+//Services
+import getTokenByUser from "../services/getTokenByUser";
 
 const Login = () => {
+  const [usernane, setUsername] = useState(null);
+  const [password, setPassword] = useState(null);
+
+  //Cookies
+  const [cookies, setCookies] = useCookies(["User"]);
+
   //Navegacion entre componentes
   const navigate = useNavigate();
 
   //Referencia del login
-  const emailRef = useRef(null);
+  const usernameRef = useRef(null);
   const passRef = useRef(null);
-
-  //Redux - userSlice
-  const { loading, email, token } = useSelector((state) => state.user);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    if (token && loading == "succeeded") {
-      dispatch(fetchUser(token));
-      navigate("/admin");
-    }
-  }, [loading, token, dispatch]);
 
   const handleLogin = (e) => {
     e.preventDefault();
-    if (!(emailRef != null && emailRef.current.value != "")) {
+
+    const username = usernameRef.current.value;
+    const password = usernameRef.current.value;
+
+    if (!(username != null && username != "")) {
       return;
     }
-    if (!(passRef != null && passRef.current.value != "")) {
+    if (!(password != null && password != "")) {
       return;
     }
 
-    if (loading == "idle") console.log(loading);
-    dispatch(
-      fetchToken({
-        email: emailRef.current.value,
-        password: passRef.current.value,
-      })
-    );
+    getTokenByUser({
+      username,
+      password,
+    }).then((res) => {
+      setCookies("User", { username, token: res.token });
+      navigate("/admin");
+    });
 
-    emailRef.current.value = "";
+    usernameRef.current.value = "";
     passRef.current.value = "";
   };
 
@@ -73,7 +75,7 @@ const Login = () => {
               <Form.Control
                 type="text"
                 placeholder="Digite el usuario"
-                ref={emailRef}
+                ref={usernameRef}
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="Usuario">

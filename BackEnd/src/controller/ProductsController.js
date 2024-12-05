@@ -1,4 +1,23 @@
 import { ProductsModel } from "../models/conection.js";
+import jwt from "jsonwebtoken";
+
+const secret = "HolaMundo";
+
+export const getTokenByUser = (req, res) => {
+  const { username, password } = req.body;
+
+  if (!(username || password))
+    return res.send({
+      error: "Debes llenar los campos",
+    });
+
+  if (!(username == "admin" && password == "admin"))
+    return res.send({ error: "Credenciales invalidas" });
+
+  const token = jwt.sign({ username }, secret, { expiresIn: "2m" });
+
+  return res.json({ token });
+};
 
 export const getProducts = async (req, res) =>
   res.send(await ProductsModel.find().sort({ _id: -1 }));
