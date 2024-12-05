@@ -12,8 +12,8 @@ const productSlice = createSlice({
   initialState,
   reducers: {
     createProduct: (state, action) => {
-      state.loading = "idle"
-      createProductsService(product)
+        state.loading = "idle"
+        createProductsService(action.payload)
     },
     uptadeProduct: (state, action) => {},
     deleteProduct: (state, action) => {},
