@@ -18,13 +18,13 @@ const productSlice = createSlice({
       state.loading = "idle";
     },
     uptadeProduct: (state, action) => {
-      const { id } = action.payload;
-      editProduct(id, action.payload);
-      state.estado = "idle";
+      const { _id } = action.payload;
+      editProduct(_id, action.payload);
+      state.loading = "idle";
     },
     deleteProduct: (state, action) => {
       removeProduct(action.payload);
-      state.estado = "idle";
+      state.loading = "idle";
     },
   },
   extraReducers: (builder) => {

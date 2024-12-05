@@ -11,16 +11,14 @@ import { faCircleUser } from "@fortawesome/free-regular-svg-icons";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { faPencil } from "@fortawesome/free-solid-svg-icons";
 //BootStrap
-import { Container } from "react-bootstrap";
+import { Button, Container } from "react-bootstrap";
 //Auto-Animate
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 //Cookies
 import { useCookies, CookiesProvider } from "react-cookie";
 //Redux
 import { useDispatch, useSelector } from "react-redux";
-import { fetchProducts } from "../../redux/slices/productsSlice";
-import removeProduct from "../../services/removeProduct";
-import editProduct from "../../services/editProduct";
+import { fetchProducts, deleteProduct } from "../../redux/slices/productsSlice";
 
 const AdminProducts = () => {
   //Redux - userSlice
@@ -104,6 +102,7 @@ const AdminProducts = () => {
                       <th className={adminproductsModule.tb_title}>
                         Descripcion
                       </th>
+                      <th className={adminproductsModule.tb_title}>Precio</th>
                       <th className={adminproductsModule.tb_title}>
                         Calificacion
                       </th>
@@ -132,6 +131,11 @@ const AdminProducts = () => {
                           <td
                             className={`${adminproductsModule.tb_body} ${adminproductsModule.tb_number}`}
                           >
+                            {item.price}
+                          </td>
+                          <td
+                            className={`${adminproductsModule.tb_body} ${adminproductsModule.tb_number}`}
+                          >
                             {item.rating.rate}
                           </td>
                           <td
@@ -139,23 +143,24 @@ const AdminProducts = () => {
                           >
                             {item.rating.count}
                           </td>
-                          <td className={adminproductsModule.tb_body}></td>
-                          <td>
+                          <td
+                            className={`${adminproductsModule.tb_body} ${adminproductsModule.tb_number}`}
+                            style={{ justifyContent: "center" }}
+                          >
                             <Button
-                              variant="danger"
+                              style={{ marginRight: "10px" }}
+                              variant="warning"
                               size="sm"
                               onClick={() => handleUptadeProduct(item)}
                             >
-                              <FontAwesomeIcon icon={faTrash} size="1x" />
+                              <FontAwesomeIcon icon={faPencil} size="1x" />
                             </Button>
-                          </td>
-                          <td>
                             <Button
                               variant="danger"
                               size="sm"
-                              onClick={() => dispatch(removeProduct(item.id))}
+                              onClick={() => dispatch(deleteProduct(item._id))}
                             >
-                              <FontAwesomeIcon icon={faPencil} size="1x" />
+                              <FontAwesomeIcon icon={faTrash} size="1x" />
                             </Button>
                           </td>
                         </tr>
@@ -177,7 +182,7 @@ const AdminProducts = () => {
             <FormEditProduct
               showUpdate={showUpdate}
               setShowUpdate={setShowUpdate}
-              producto={product}
+              product={product}
             />
           </main>
         </Container>
