@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@fontsource/roboto": "^5.1.0",
+    "@formkit/auto-animate": "^0.8.2",
     "@fortawesome/fontawesome-svg-core": "^6.6.0",
     "@fortawesome/free-brands-svg-icons": "^6.7.1",
     "@fortawesome/free-regular-svg-icons": "^6.6.0",
@@ -27,6 +28,7 @@
     "react-router-dom": "^6.28.0",
     "redux": "^5.0.1",
     "sweetalert2": "^11.14.5",
+    "uuid": "^11.0.3",
     "venta-autos": "file:"
   },
   "devDependencies": {

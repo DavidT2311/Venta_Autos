@@ -1,17 +1,19 @@
-import { div, main, tr } from "motion/react-client";
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import FormCreateProduct from "../../components/CreateProduct";
 import FormEditProduct from "../../components/FormEditProduct";
 //Style
 import adminproductsModule from "./AdminProducts.module.css";
+//Components
+import PaginationComponent from "../../components/Pagination";
 //Font-Awesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleUser } from "@fortawesome/free-regular-svg-icons";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { faPencil } from "@fortawesome/free-solid-svg-icons";
 //BootStrap
-import { Container, Table } from "react-bootstrap";
-import Button from "react-bootstrap/Button";
+import { Container } from "react-bootstrap";
+//Auto-Animate
+import { useAutoAnimate } from "@formkit/auto-animate/react";
 //Redux
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../../redux/slices/productsSlice";
@@ -20,14 +22,19 @@ import editProduct from "../../services/editProduct";
 
 const AdminProducts = () => {
   //Redux - userSlice
-  const dispatch = useDispatch();
-  const [showUpdate, setShowUpdate] = useState(false);
-  const [product, setProduct] = useState(null);
+  const { products, loading } = useSelector((state) => state.products);
   const { token, email, name, role, avatar } = useSelector(
     (state) => state.user
   );
+  const dispatch = useDispatch();
 
-  const { products, loading } = useSelector((state) => state.products);
+  //Elementos para la paginacion
+  const [currentPage, setCurrentPage] = useState(1);
+  const lastIndexSlice = currentPage * 4;
+  const firstIndexSlice = lastIndexSlice - 4;
+
+  //Auto-animate
+  const [parent] = useAutoAnimate();
 
   useEffect(() => {
     if (loading == "idle") dispatch(fetchProducts());
@@ -38,49 +45,44 @@ const AdminProducts = () => {
     setShowUpdate(true);
   };
   return (
-    <>
-      <Container>
-        <header className={adminproductsModule.header}>
-          <span className={adminproductsModule.header_title}>Dashboard</span>
-          <div className={adminproductsModule.logout_container}>
-            <span className={adminproductsModule.logout_text}>{name}</span>
-            <FontAwesomeIcon
-              icon={faCircleUser}
-              size="3x"
-              color="white"
-              className={adminproductsModule.logout_icon}
+    <Container>
+      <header className={adminproductsModule.header}>
+        <span className={adminproductsModule.header_title}>Dashboard</span>
+        <div className={adminproductsModule.logout_container}>
+          <span className={adminproductsModule.logout_text}>{name}</span>
+          <FontAwesomeIcon
+            icon={faCircleUser}
+            size="3x"
+            color="white"
+            className={adminproductsModule.logout_icon}
+          />
+        </div>
+      </header>
+      <main className={adminproductsModule.main}>
+        <h1 className={adminproductsModule.products_title}>Productos</h1>
+        <section className={adminproductsModule.products_section}>
+          <article>
+            <FormCreateProduct
+              T={"Agregar producto"}
+              TxtBtn={"Agregar nuevo producto"}
+              TxtBtnIn={"Crear producto"}
             />
-          </div>
-        </header>
-        <main className={adminproductsModule.main}>
-          <h1 className={adminproductsModule.products_title}>Productos</h1>
-          <section className={adminproductsModule.products_section}>
-            <article>
-              <FormCreateProduct
-                title={"Agregar producto"}
-                TxtBtn={"Agregar nuevo producto"}
-              />
-              {/* Aca va la barra de buscar y el boton de agregar */}
-            </article>
-            <article>
-              <table className={adminproductsModule.table}>
-                <thead>
-                  <tr className={adminproductsModule.table_header}>
-                    <th className={adminproductsModule.tb_title}>Titulo</th>
-                    <th className={adminproductsModule.tb_title}>Categoria</th>
-                    <th className={adminproductsModule.tb_title}>
-                      Descripcion
-                    </th>
-                    <th className={adminproductsModule.tb_title}>
-                      Calificacion
-                    </th>
-                    <th className={adminproductsModule.tb_title}>Comprados</th>
-                    <th className={adminproductsModule.tb_title}>Acciones</th>
-                  </tr>
-                </thead>
-
-                <tbody className={adminproductsModule.table_body}>
-                  {products.map((item, index) => (
+          </article>
+          <article>
+            <table className={adminproductsModule.table}>
+              <thead>
+                <tr className={adminproductsModule.table_header}>
+                  <th className={adminproductsModule.tb_title}>Titulo</th>
+                  <th className={adminproductsModule.tb_title}>Categoria</th>
+                  <th className={adminproductsModule.tb_title}>Descripcion</th>
+                  <th className={adminproductsModule.tb_title}>Calificacion</th>
+                  <th className={adminproductsModule.tb_title}>Comprados</th>
+                  <th className={adminproductsModule.tb_title}>Acciones</th>
+                </tr>
+              </thead>
+              <tbody className={adminproductsModule.table_body} ref={parent}>
+                {products
+                  .map((item, index) => (
                     <tr key={index}>
                       <td className={adminproductsModule.tb_body}>
                         {item.title}
@@ -101,41 +103,25 @@ const AdminProducts = () => {
                       >
                         {item.rating.count}
                       </td>
-                      <td>
-                        <Button
-                          variant="secondary"
-                          size="sm"
-                          color="danger "
-                          onClick={() => dispatch(handleUptadeProduct(item))}
-                        >
-                          <FontAwesomeIcon icon={faPencil} size="1x" />
-                        </Button>
-                      </td>
-                      <td>
-                        <Button
-                          variant="secondary"
-                          size="sm"
-                          color="danger "
-                          onClick={() => dispatch(removeProduct(item._id))}
-                        >
-                          <FontAwesomeIcon icon={faTrash} size="1x" />
-                        </Button>
-                      </td>
                       <td className={adminproductsModule.tb_body}></td>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
-            </article>
-          </section>
-          <FormEditProduct
-            showUpdate={showUpdate}
-            setShowUpdate={setShowUpdate}
-            product={product}
+                  ))
+                  .slice(firstIndexSlice, lastIndexSlice)}
+              </tbody>
+            </table>
+          </article>
+        </section>
+        <section className={adminproductsModule.pagination_section}>
+          <PaginationComponent
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+            quantityOfProducts={products.length}
+            quantityProductsPerPage={4}
+            reference={parent}
           />
-        </main>
-      </Container>
-    </>
+        </section>
+      </main>
+    </Container>
   );
 };
 

@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-//Services
 import getProducts from "../../services/getProducts";
 import removeProduct from "../../services/removeProduct";
 import editProduct from "../../services/editProduct";

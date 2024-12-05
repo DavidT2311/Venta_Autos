@@ -4,7 +4,7 @@ const getConection = () =>
   mongoose.connect("mongodb://127.0.0.1:27017/Venta_Autos");
 
 const productsSchema = new Schema({
-  id: Number,
+  _id: String,
   title: String,
   price: Number,
   description: String,
