@@ -46,12 +46,21 @@ const FormCreateProduct = ({ title, TxtBtn }) => {
       newErrors.image = "La URL de la imagen debe ser válida.";
     }
 
-    if (rateRef.current.value && (isNaN(rateRef.current.value) || rateRef.current.value < 0 || rateRef.current.value > 5)) {
+    if (
+      rateRef.current.value &&
+      (isNaN(rateRef.current.value) ||
+        rateRef.current.value < 0 ||
+        rateRef.current.value > 5)
+    ) {
       newErrors.rate = "La calificación (rate) debe ser un número entre 0 y 5.";
     }
 
-    if (countRef.current.value && (isNaN(countRef.current.value) || countRef.current.value < 0)) {
-      newErrors.count = "El número de valoraciones (count) debe ser un entero positivo.";
+    if (
+      countRef.current.value &&
+      (isNaN(countRef.current.value) || countRef.current.value < 0)
+    ) {
+      newErrors.count =
+        "El número de valoraciones (count) debe ser un entero positivo.";
     }
 
     setErrors(newErrors);
@@ -59,8 +68,6 @@ const FormCreateProduct = ({ title, TxtBtn }) => {
 
   return (
     <div className="container mt-5">
-      
-
       <div className="d-flex justify-content-end mb-3">
         <Button variant="secondary" onClick={handleShow}>
           {TxtBtn}
