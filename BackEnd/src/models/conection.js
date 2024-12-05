@@ -1,7 +1,7 @@
 import mongoose, { Schema } from "mongoose";
 
 const getConection = () =>
-  mongoose.connect("mongodb://127.0.0.1:27017/Products");
+  mongoose.connect("mongodb://127.0.0.1:27017/Venta_Autos");
 
 const productsSchema = new Schema({
   _id: String,
