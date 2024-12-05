@@ -44,12 +44,16 @@ const FormEditProduct = ({ showUpdate, setShowUpdate, product }) => {
     }
 
     const productUpdate = {
-      id: product.id,
+      _id: product._id,
       title: titleRef.current.value,
       price: priceRef.current.value,
       description: descriptionRef.current.value,
       category: categoryRef.current.value,
       image: imageRef.current.value,
+      rating: {
+        rate: 1,
+        count: 4,
+      },
     };
     dispatch(uptadeProduct(productUpdate));
     setShowUpdate(false);
