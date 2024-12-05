@@ -10,10 +10,10 @@ const productsSchema = new Schema({
   description: String,
   category: String,
   image: String,
-  rating:  {
+  rating: {
     rate: Number,
     count: Number,
-    },
+  },
 });
 
 export const ProductsModel = mongoose.model("products", productsSchema);

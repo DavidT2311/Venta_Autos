@@ -20,4 +20,3 @@ const createProductsService = async (product) => {
 };
 
 export default createProductsService;
-
