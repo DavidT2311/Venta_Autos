@@ -24,6 +24,8 @@ import editProduct from "../../services/editProduct";
 
 const AdminProducts = () => {
   //Redux - userSlice
+  const [showUpdate, setShowUpdate] = useState(false);
+  const [product, setProduct] = useState(null);
   const { products, loading } = useSelector((state) => state.products);
   const dispatch = useDispatch();
 
@@ -138,6 +140,24 @@ const AdminProducts = () => {
                             {item.rating.count}
                           </td>
                           <td className={adminproductsModule.tb_body}></td>
+                          <td>
+                            <Button
+                              variant="danger"
+                              size="sm"
+                              onClick={() => handleUptadeProduct(item)}
+                            >
+                              <FontAwesomeIcon icon={faTrash} size="1x" />
+                            </Button>
+                          </td>
+                          <td>
+                            <Button
+                              variant="danger"
+                              size="sm"
+                              onClick={() => dispatch(removeProduct(item.id))}
+                            >
+                              <FontAwesomeIcon icon={faPencil} size="1x" />
+                            </Button>
+                          </td>
                         </tr>
                       ))
                       .slice(firstIndexSlice, lastIndexSlice)}
@@ -154,6 +174,11 @@ const AdminProducts = () => {
                 reference={parent}
               />
             </section>
+            <FormEditProduct
+              showUpdate={showUpdate}
+              setShowUpdate={setShowUpdate}
+              producto={product}
+            />
           </main>
         </Container>
       ) : (

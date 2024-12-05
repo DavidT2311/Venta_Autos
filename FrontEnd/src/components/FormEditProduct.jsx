@@ -44,7 +44,7 @@ const FormEditProduct = ({ showUpdate, setShowUpdate, product }) => {
     }
 
     const productUpdate = {
-      _id: product._id,
+      id: product.id,
       title: titleRef.current.value,
       price: priceRef.current.value,
       description: descriptionRef.current.value,
