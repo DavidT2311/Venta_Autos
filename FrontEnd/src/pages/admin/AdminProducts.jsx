@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import FormCreateProduct from "../../components/CreateProduct";
+import FormEditProduct from "../../components/FormEditProduct";
 //Style
 import adminproductsModule from "./AdminProducts.module.css";
 //Components
@@ -7,6 +8,8 @@ import PaginationComponent from "../../components/Pagination";
 //Font-Awesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleUser } from "@fortawesome/free-regular-svg-icons";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faPencil } from "@fortawesome/free-solid-svg-icons";
 //BootStrap
 import { Container } from "react-bootstrap";
 //Auto-Animate
@@ -16,6 +19,8 @@ import { useCookies, CookiesProvider } from "react-cookie";
 //Redux
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../../redux/slices/productsSlice";
+import removeProduct from "../../services/removeProduct";
+import editProduct from "../../services/editProduct";
 
 const AdminProducts = () => {
   //Redux - userSlice
@@ -54,6 +59,10 @@ const AdminProducts = () => {
     if (loading == "idle") dispatch(fetchProducts());
   }, [loading, dispatch]);
 
+  const handleUptadeProduct = (product) => {
+    setProduct(product);
+    setShowUpdate(true);
+  };
   return (
     <CookiesProvider>
       {token ? (
