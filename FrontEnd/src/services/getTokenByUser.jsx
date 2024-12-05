@@ -1,6 +1,6 @@
 const getTokenByUser = async (user) => {
   try {
-    const data = await fetch("https://api.escuelajs.co/api/v1/auth/login", {
+    const data = await fetch("http://localhost:3000/getTokenByUser", {
       method: "POST",
       body: JSON.stringify(user),
       headers: {
