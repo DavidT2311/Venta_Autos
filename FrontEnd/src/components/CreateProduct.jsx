@@ -2,10 +2,14 @@ import { useState, useId } from "react";
 import { useDispatch } from "react-redux";
 import { Modal, Form, Button, Spinner } from "react-bootstrap";
 import { createProduct } from "../redux/slices/productsSlice/";
+import { useState, useId } from "react";
+import { useDispatch } from "react-redux";
+import { Modal, Form, Button, Spinner } from "react-bootstrap";
+import { createProduct } from "../redux/slices/productsSlice";
 
 const FormCreateProduct = ({ Txttitle, TxtBtn, TxtBtnIn }) => {
   const baseId = useId();
-  const [counter, setCounter] = useState(22);
+  const [counter, setCounter] = useState(2000);
   const [title, setTitle] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
@@ -13,6 +17,7 @@ const FormCreateProduct = ({ Txttitle, TxtBtn, TxtBtnIn }) => {
   const [image, setImage] = useState("");
 
   const dispatch = useDispatch();
+
 
   const [loading, setLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -26,7 +31,17 @@ const FormCreateProduct = ({ Txttitle, TxtBtn, TxtBtnIn }) => {
     setDescription("");
     setCategory("");
     setImage("");
+    setShowModal(false);
+    setErrors({});
+    setTitle("");
+    setPrice("");
+    setDescription("");
+    setCategory("");
+    setImage("");
   };
+
+  const validate = () => {
+    const newErrors = {};
 
   const validate = () => {
     const newErrors = {};
@@ -39,9 +54,10 @@ const FormCreateProduct = ({ Txttitle, TxtBtn, TxtBtnIn }) => {
     if (!description.trim()) {
       newErrors.description = "La descripción es obligatoria.";
     }
-    if (!category.trim()) {
-      newErrors.category = "La categoría es obligatoria.";
+    if (!category || !category.trim() || category === "") {
+      newErrors.category = "Debe seleccionar una categoría.";
     }
+    if (!image.trim() && !image.startsWith("http")) {
     if (!image.trim() && !image.startsWith("http")) {
       newErrors.image = "La URL de la imagen debe ser válida.";
     }
@@ -69,6 +85,9 @@ const FormCreateProduct = ({ Txttitle, TxtBtn, TxtBtnIn }) => {
   const handleClick = () => {
     if (!validate()) return;
     const Id = `${baseId}-${counter}`;
+  const handleClick = () => {
+    if (!validate()) return;
+    const Id = `${baseId}-${counter}`;
     const newproduct = {
       _id: Id,
       title: title,
@@ -80,9 +99,11 @@ const FormCreateProduct = ({ Txttitle, TxtBtn, TxtBtnIn }) => {
         rate: 1,
         count: 4,
       },
+      },
     };
     dispatch(createProduct(newproduct));
     setCounter(counter + 1);
+    handleClose();
     handleClose();
   };
   return (
@@ -141,13 +162,17 @@ const FormCreateProduct = ({ Txttitle, TxtBtn, TxtBtnIn }) => {
             </Form.Group>
             <Form.Group className="mb-3" controlId="formCategory">
               <Form.Label>Categoría</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Introduce la categoría"
+              <Form.Select
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
                 isInvalid={!!errors.category}
-              />
+              >
+                <option value="">Selecciona una categoría</option>
+                <option value="men's clothing">men's clothing</option>
+                <option value="jewelery">jewelery</option>
+                <option value="electronics">electronics</option>
+                <option value="women's clothing">women's clothing</option>
+              </Form.Select>
               <Form.Control.Feedback type="invalid">
                 {errors.category}
               </Form.Control.Feedback>

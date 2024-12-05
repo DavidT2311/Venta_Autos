@@ -12,7 +12,10 @@ const productSlice = createSlice({
   name: "Products",
   initialState,
   reducers: {
-    createProduct: (state, action) => {},
+    createProduct: (state, action) => {
+      createProductsService(action.payload)
+      state.loading = "idle"
+    },
     uptadeProduct: (state, action) => {
       const { id } = action.payload;
       editProduct(id, action.payload);

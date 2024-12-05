@@ -10,6 +10,8 @@ const createProductsService = async (product) => {
     const json = await response.json();
     if (!response.ok) {
       throw new Error("Ocurrió un error al crear el producto.");
+    } else{
+      return `guardado con exito ${json}`
     }
   } catch (error) {
     console.error("Error en createProducts:", error);
