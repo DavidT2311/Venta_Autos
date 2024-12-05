@@ -1,37 +1,35 @@
-import { useState,useId} from "react";
-import { useDispatch} from "react-redux";
-import { Modal, Form, Button, Spinner} from "react-bootstrap";
-import { createProduct} from "../redux/slices/productsSlice/";
-
+import { useState, useId } from "react";
+import { useDispatch } from "react-redux";
+import { Modal, Form, Button, Spinner } from "react-bootstrap";
+import { createProduct } from "../redux/slices/productsSlice/";
 
 const FormCreateProduct = ({ Txttitle, TxtBtn, TxtBtnIn }) => {
   const baseId = useId();
   const [counter, setCounter] = useState(22);
-  const [title, setTitle] = useState('');
-  const [price, setPrice] = useState('');
-  const [description, setDescription] = useState('');
-  const [category, setCategory] = useState('');
-  const [image, setImage] = useState('');
+  const [title, setTitle] = useState("");
+  const [price, setPrice] = useState("");
+  const [description, setDescription] = useState("");
+  const [category, setCategory] = useState("");
+  const [image, setImage] = useState("");
 
   const dispatch = useDispatch();
-  
-  
+
   const [loading, setLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [errors, setErrors] = useState({});
   const handleShow = () => setShowModal(true);
   const handleClose = () => {
-  setShowModal(false);
-  setErrors({}); 
-  setTitle('');
-  setPrice('');
-  setDescription('');
-  setCategory('');
-  setImage('');
+    setShowModal(false);
+    setErrors({});
+    setTitle("");
+    setPrice("");
+    setDescription("");
+    setCategory("");
+    setImage("");
   };
-  
-  const validate =  () => {
-  const newErrors = {};
+
+  const validate = () => {
+    const newErrors = {};
     if (!title.trim()) {
       newErrors.title = "El título es obligatorio.";
     }
@@ -44,18 +42,33 @@ const FormCreateProduct = ({ Txttitle, TxtBtn, TxtBtnIn }) => {
     if (!category.trim()) {
       newErrors.category = "La categoría es obligatoria.";
     }
-    if (
-      !image.trim() && !image.startsWith("http")
-    ) {
+    if (!image.trim() && !image.startsWith("http")) {
       newErrors.image = "La URL de la imagen debe ser válida.";
     }
+
+    if (
+      rateRef.current.value &&
+      (isNaN(rateRef.current.value) ||
+        rateRef.current.value < 0 ||
+        rateRef.current.value > 5)
+    ) {
+      newErrors.rate = "La calificación (rate) debe ser un número entre 0 y 5.";
+    }
+
+    if (
+      countRef.current.value &&
+      (isNaN(countRef.current.value) || countRef.current.value < 0)
+    ) {
+      newErrors.count =
+        "El número de valoraciones (count) debe ser un entero positivo.";
+    }
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
-  
   };
-  const handleClick =  () => {
-    if(!validate()) return;
-    const Id = `${baseId}-${counter}`
+  const handleClick = () => {
+    if (!validate()) return;
+    const Id = `${baseId}-${counter}`;
     const newproduct = {
       _id: Id,
       title: title,
@@ -66,11 +79,11 @@ const FormCreateProduct = ({ Txttitle, TxtBtn, TxtBtnIn }) => {
       rating: {
         rate: 1,
         count: 4,
-      }
+      },
     };
     dispatch(createProduct(newproduct));
     setCounter(counter + 1);
-    handleClose()
+    handleClose();
   };
   return (
     <div className="container mt-5">
