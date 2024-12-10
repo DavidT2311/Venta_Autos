@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import getProducts from "../../services/getProducts";
 import removeProduct from "../../services/removeProduct";
+import createProductsService from "../../services/createProductsService";
 import editProduct from "../../services/editProduct";
 
 const initialState = {

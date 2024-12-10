@@ -39,7 +39,7 @@ const FormCreateProduct = ({ Txttitle, TxtBtn, TxtBtnIn }) => {
     if (!description.trim()) {
       newErrors.description = "La descripción es obligatoria.";
     }
-    if (!category || !category.trim() || category === "") {
+    if (!category && !category.trim() && category === "") {
       newErrors.category = "Debe seleccionar una categoría.";
     }
     if (!image.trim() && !image.startsWith("http")) {

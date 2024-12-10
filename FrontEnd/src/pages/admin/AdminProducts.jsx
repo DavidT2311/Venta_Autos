@@ -111,7 +111,7 @@ const AdminProducts = () => {
                       <th className={adminproductsModule.tb_title}>Acciones</th>
                     </tr>
                   </thead>
-                  <tbody
+                  {/* <tbody
                     className={adminproductsModule.table_body}
                     ref={parent}
                   >
@@ -141,18 +141,18 @@ const AdminProducts = () => {
                         </tr>
                       ))
                       .slice(firstIndexSlice, lastIndexSlice)}
-                  </tbody>
+                  </tbody> */}
                 </table>
               </article>
             </section>
             <section className={adminproductsModule.pagination_section}>
-              <PaginationComponent
+              {/* <PaginationComponent
                 currentPage={currentPage}
                 setCurrentPage={setCurrentPage}
                 quantityOfProducts={products.length}
                 quantityProductsPerPage={4}
                 reference={parent}
-              />
+              /> */}
             </section>
           </main>
         </Container>
